@@ -50,6 +50,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         Route::resource('evenements', EvenementsController::class)->except(['delete']);
         Route::delete('/evenements/{id}', [EvenementsController::class, 'destroy'])->name('evenements.destroy');
+        Route::get('/evenements/{evenement}/edit', [EvenementsController::class, 'edit'])->name('evenements.edit');
+        Route::post('/evenements/{evenement}', [EvenementsController::class, 'update'])->name('evenements.update');
     });
 });
 

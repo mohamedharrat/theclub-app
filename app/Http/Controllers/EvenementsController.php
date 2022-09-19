@@ -94,10 +94,19 @@ class EvenementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Evenements $evenement)
     {
         //
+        $categories = categories::select('name', 'id')->get();
+        $regions = Region::select('name', 'id')->oldest('name')->get();
+        $villes = Ville::select('name', 'id')->oldest('name')->get();
 
+        return view('admin.evenements.evenementsEdited', [
+            'evenement' => $evenement,
+            'categories' => $categories,
+            'regions' => $regions,
+            'villes' => $villes,
+        ]);
     }
 
     /**
@@ -107,9 +116,30 @@ class EvenementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Evenements $evenement)
     {
         //
+        $valid = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required',
+
+        ]);
+
+        $evenementEdited = $valid;
+        $evenementEdited['category_id'] = $request->categories;
+        $evenementEdited['region'] = $request->region;
+        $evenementEdited['city'] = $request->ville;
+        $evenementEdited['date_heure'] = $request->date_heure;
+        $evenementEdited['duree'] = $request->duree;
+        $evenementEdited['author_id'] = Auth::user()->id;
+        $evenementEdited['adresse'] = $request->adresse;
+
+        $evenement->update($evenementEdited);
+
+
+        if ($evenement) {
+            return view('admin.evenements.evenementsList')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
+        }
     }
 
     /**
