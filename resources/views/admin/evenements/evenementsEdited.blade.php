@@ -1,5 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
+<div class="row">
+
+</div>
     <div class="container p-4">
                     
         <form action="{{route('evenements.update',['evenement'=>$evenement->id])}}" method="post" enctype="multipart/form-data">

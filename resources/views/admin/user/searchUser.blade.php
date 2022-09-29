@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('title','liste d\'articles')
 @section('content')
     {{$results->links()}}

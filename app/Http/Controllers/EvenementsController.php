@@ -116,9 +116,10 @@ class EvenementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Evenements $evenement)
+    public function update(Request $request, $id)
     {
         //
+        $evenement = Evenements::find($id);
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
@@ -138,6 +139,7 @@ class EvenementsController extends Controller
 
 
         if ($evenement) {
+
             return view('admin.evenements.evenementsList')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
         }
     }

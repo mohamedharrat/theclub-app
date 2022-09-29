@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
 <a class="addUser" style="color:black" href="{{route('users.create')}}"><i class="bi bi-person-plus-fill"></i>  Add User</a>
@@ -38,14 +38,14 @@
 </div>
 @endif
 <form class="d-flex mb-3 w-50" role="search" action="{{route('users.search')}}" method="GET">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search-user" value="{{request()->q ?? ''}}">
+    <input class="form-control me-2 bg bg-dark text-light border border-dark" type="search" placeholder="Search" aria-label="Search" name="search-user" value="{{request()->q ?? ''}}">
     <button class="btn btn-outline-dark" type="submit" >
       <i class="bi bi-search"></i>
     </button>
 </form>
-<table class="table table-bordered border-dark text-center" >
+{{-- <table class="table table-bordered border-dark text-center" > --}}
     {{-- {{$users->links()}} --}}
-
+{{-- 
 
     <thead>
         <tr>
@@ -72,9 +72,7 @@
                     <a href="#" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')){document.getElementById('delete-{{$user->id}}').submit()}" style="text-decoration: none">
                         <i class="bi bi-trash px-1"></i>
                     </a>
-                    {{-- <a href="{{route('users.view',['id'=>$user->id])}}" style="text-decoration: none">
-                        <i class="bi bi-eye"></i>
-                    </a> --}}
+                   
 
                     <form id="delete-{{$user->id}}" action="{{route('users.destroy',['user'=>$user->id])}}" method="post">
                         @csrf
@@ -85,9 +83,31 @@
             </tr>
         @endforeach
     </tbody>
-</table>
+</table> --}}
 
     {{-- {{$users->links()}} --}}
 
+    @foreach ($users as $user)
+    <div class="card bg bg-dark text-light mb-5">
+        <div class="card-header">{{$user->id}}.  {{$user->name}}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{$user->email}}</h5>
+          <p class="card-text">Rôle : {{$user->role}} / inscrit depuis :  {{$user->created_at}}</p>
+            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+            <a href="{{route('users.edit',['user'=>$user->id])}}" style="text-decoration: none">
+                <i class="bi bi-pencil-square px-1"></i> Modifier
+            </a>
+            <a href="#" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')){document.getElementById('delete-{{$user->id}}').submit()}" style="text-decoration: none">
+                <i class="bi bi-trash px-1"></i> Supprimer
+            </a>
+           
+
+            <form id="delete-{{$user->id}}" action="{{route('users.destroy',['user'=>$user->id])}}" method="post">
+                @csrf
+                @method('delete')
+            </form>
+        </div>
+      </div>
+    @endforeach
 
 @endsection

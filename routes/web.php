@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\EvenementsController;
+use App\Http\Controllers\UserEvenementsController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 /*
@@ -21,6 +22,9 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'admin']);
 
 // Route::get('/adminHome', function () {
 //     return view('adminHome');
@@ -57,3 +61,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/users/{user}', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+
+Route::resource('userEvenements', UserEvenementsController::class);

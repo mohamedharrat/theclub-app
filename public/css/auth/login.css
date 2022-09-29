@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+
+
+* {
+    font-family: "Source Sans Pro";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    -webkit-animation:tilt-in-fwd-tr .6s cubic-bezier(.25,.46,.45,.94) both;animation:tilt-in-fwd-tr .6s cubic-bezier(.25,.46,.45,.94) both;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background: #000000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.left {
+    width: 50%;
+}
+
+.btn-accueil {
+    color: #f83600;
+    padding: 10px;
+    margin-bottom: 20px; 
+    border: 1px solid #f83600;
+    border-radius: 50px;
+    /* float: left; */
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+.btn-accueil:hover {
+    color: #333;
+    background: #f83600;
+    transform: scale(1.2);
+}
+
+.login {
+    margin-top: 50px !important;
+    margin-left: 50px !important;
+    background-color: rgba(0, 0, 0, 0);
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -8px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -8px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -8px 10px 5px 0px rgba(0,0,0,0.75);
+}
+/* body#tinymce {
+background: #FFFFFF
+} */
+
+form label {
+    color: #f83600;
+}
+
+form input {
+    margin-bottom: 20px;
+    background-color: transparent;
+    outline: none;
+    color: #f83600;
+    border: none;
+    /* border-radius: 50px; */
+    border-bottom:1px solid  #f83600;
+}
+
+form .input:focus {
+    background-color: transparent;
+}
+
+form button {
+    cursor: pointer;
+    background: transparent;
+    padding: 10px;
+    border-radius: 50px;
+    color: #f83600 !important;
+    border: 1px solid #f83600 !important;
+    transition: .3s ease-in-out !important;
+}
+
+form button:hover {
+    background: #f83600 !important;
+    color: black !important;
+    transform: translateX(-10px) !important;
+    border: 1px black solid !important;
+}
+
+form a {
+    margin-left: 5px;
+    color: #f83600;
+}
+
+.login::after {
+    z-index: -1;
+    top: 0;
+    right: 0;
+    position: absolute;
+    content:"";
+    height: 100vh;
+    width: 800px;
+    background: url(/photo-login/login.jpg) center/cover;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+
+@-webkit-keyframes tilt-in-fwd-tr{0%{-webkit-transform:rotateY(20deg) rotateX(35deg) translate(300px,-300px) skew(-35deg,10deg);transform:rotateY(20deg) rotateX(35deg) translate(300px,-300px) skew(-35deg,10deg);opacity:0}100%{-webkit-transform:rotateY(0) rotateX(0deg) translate(0,0) skew(0deg,0deg);transform:rotateY(0) rotateX(0deg) translate(0,0) skew(0deg,0deg);opacity:1}}@keyframes tilt-in-fwd-tr{0%{-webkit-transform:rotateY(20deg) rotateX(35deg) translate(300px,-300px) skew(-35deg,10deg);transform:rotateY(20deg) rotateX(35deg) translate(300px,-300px) skew(-35deg,10deg);opacity:0}100%{-webkit-transform:rotateY(0) rotateX(0deg) translate(0,0) skew(0deg,0deg);transform:rotateY(0) rotateX(0deg) translate(0,0) skew(0deg,0deg);opacity:1}}

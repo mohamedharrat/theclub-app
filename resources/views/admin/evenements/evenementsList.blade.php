@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
-<a class="addEvents" style="color:black" href="{{route('evenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  Add Evenements</a>
+<a class="addEvents" style="color:black;margin-bottom:20px" href="{{route('evenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  Add Evenements</a>
 <br>
 
 @if (session('delete'))
@@ -10,9 +10,9 @@
 </div>  
 @endif
 
-@if (session('compteUpdate'))
+@if (session('Update'))
 <div class="alert alert-success">
-    {{session('compteUpdate')}}
+    {{session('Update')}}
 </div>
 @endif
 @if (session('inscription'))
@@ -44,7 +44,7 @@
       <i class="bi bi-search"></i>
     </button>
 </form> --}}
-<table class="table table-bordered border-dark text-center" >
+<table class="table table-bordered  text-center" >
     {{-- {{$users->links()}} --}}
 
 

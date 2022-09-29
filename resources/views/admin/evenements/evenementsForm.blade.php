@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('title','creer une annonce')
 @section('content')
     <div class="container p-4">

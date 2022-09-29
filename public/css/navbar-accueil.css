@@ -1,0 +1,13 @@
+.btn-login, .btn-register {
+color: black;
+border: 2px solid black;
+text-decoration: none;
+padding: 10px 20px;
+border-radius: 20px;
+transition: .3s ease-in-out;
+}
+
+.btn-login:hover, .btn-register:hover {
+    color: white;
+    background-color: #333;
+}
