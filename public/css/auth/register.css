@@ -28,7 +28,7 @@ body {
 
 .registre h2 {
   
-color: #f83600;
+color: white;
     
 }
 
@@ -38,16 +38,16 @@ form {
   
 }
 form label {
-    color: #f83600;
+    color: white;
 }
 
 form input {
     background-color: transparent;
     outline: none;
-    color: #f83600;
+    color: white;
     border: none;
     /* border-radius: 50px; */
-    border-bottom:1px solid  #f83600;
+    border-bottom:1px solid  white;
 }
 
 form input:focus {
@@ -55,13 +55,13 @@ form input:focus {
 }
 
 form button {
-    color: #f83600 !important;
-    border: 1px solid #f83600 !important;
+    color: white !important;
+    border: 1px solid white !important;
     transition: .3s ease-in-out !important;
 }
 
 form button:hover {
-    background: #f83600 !important;
+    background: white !important;
     color: black !important;
     transform: translateX(10px) !important;
     border: 1px black solid !important;
@@ -90,10 +90,10 @@ form button:hover {
 }
 
 .accueil {
-    color: #f83600 !important;
+    color: white !important;
     height: 30px;
     padding: 0 5px ;
-    border: 1px solid #f83600;
+    border: 1px solid white;
     border-radius: 50px;
     /* float: left; */
     text-decoration: none !important;
@@ -103,7 +103,7 @@ form button:hover {
 }
 .accueil:hover {
     color: #333 !important;
-    background: #f83600;
+    background: white;
     transform: scale(1.2);
 }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\EvenementsController;
 use App\Http\Controllers\UserEvenementsController;
+use App\Models\UserEvenement;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 /*
@@ -63,4 +64,12 @@ Route::get('/users/{user}', [UserController::class, 'edit'])->name('users.edit')
 Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
 
-Route::resource('userEvenements', UserEvenementsController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('userEvenements', UserEvenementsController::class);
+    Route::delete('userEvenements/{userEvenement}', [UserEvenementsController::class, 'destroy'])->name('userEvenements.destroy');
+    Route::get('/userEvenements/{id}/participe', [UserEvenementsController::class, 'participe'])->name('userEvenements.participe');
+    Route::get('userEvenements/{userEvenement}/edit', [UserEvenementsController::class, 'edit'])->name('userEvenements.edit');
+    Route::post('userEvenements/{userEvenement}', [UserEvenementsController::class, 'update'])->name('userEvenements.update');
+});
+// Route::get('userEvenements/{userEvenement}/show', [UserEvenementsController::class, 'show'])->name('userEvenements.show');

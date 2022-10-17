@@ -21,10 +21,10 @@
             </a> --}}
             <nav class="">
                 <div class="nav-nav">  
-                    <p class="">THE CLUB</p>
+                    
+                    <p class="p-nav">{{ Auth::user()->name }} : {{Auth::user()->role}}</p>
                     <div class="nav-1">
 
-                        <p class="p-nav">{{ Auth::user()->name }} : {{Auth::user()->role}}</p>
                         @if (Auth::user()->role =='admin')
                         <a href="/dashboard" class="a-nav">dashboard</a>
                         

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->dateTime('date_heure');
+            $table->date('date');
+            $table->time('heure');
             $table->string('duree');
             $table->string('region');
             $table->string('city');
@@ -26,6 +27,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign("author_id")->references("id")->on("users");
             $table->string('adresse');
+            $table->string('lieu');
+            $table->string('players_number');
             $table->timestamps();
         });
     }

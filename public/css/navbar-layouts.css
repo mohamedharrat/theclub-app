@@ -6,7 +6,7 @@
 
 .navbar-layouts {
     background: #333;
-    color: orange;
+    color: white;
     height: 30px;
     display: flex;
     /* justify-content: center; */
@@ -39,7 +39,7 @@
 .nav-1 a {
     margin-top: 5px;
     margin-right: 20px;
-    color: orange;
+    color: white;
     padding: 5px;
     text-decoration: none;
     transition: .3s ease-in-out;

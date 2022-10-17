@@ -11,6 +11,10 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background: #373B44;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .cont {
@@ -21,7 +25,7 @@ grid-column-gap: 0px;
 grid-row-gap: 0px;
 height: 100vh;
 width: 100%;
-background-color: #fe8c00;
+/* background-color: #fe8c00; */
 }
 
 .titre {
@@ -31,9 +35,7 @@ background-color: #fe8c00;
      justify-content: center;
      align-items: center;
      flex-direction: column;
-     background: #fe8c00;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f83600, #fe8c00);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #f83600, #fe8c00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 
 
 }

@@ -1,0 +1,67 @@
+
+#date {
+    background: #333;
+    color: white;
+}
+
+
+
+.list {
+    margin: 10px;
+    padding: 20px;
+}
+.evenement {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #333;
+    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.heure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    color: white;
+    /* background: green; */
+}
+
+.info {
+    /* background: whitesmoke; */
+    color: white;
+    background: transparent;
+
+    padding: 10px;
+    width: 75%;
+}
+
+.nbr {
+    float: right;
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    background: transparent;
+}
+
+.show a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    /* border: 1px solid #333; */
+    /* border-radius: 50px; */
+    transition: .3s ease-in-out
+}
+
+.show a:hover {
+    color: white;
+    /* background-color: #333; */
+    transform: translateY(-5px);
+}

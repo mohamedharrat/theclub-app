@@ -1,0 +1,119 @@
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+
+body {
+    max-width: 100%;
+    background: #000000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+}
+
+.info-ev {
+    -webkit-box-shadow: 5px 5px 14px 5px #000000; 
+box-shadow: 5px 5px 14px 5px #000000;
+    position: relative;
+    /* margin-top: 20px; */
+    width: 500px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    border: #000000 1px solid;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info-ev header {
+   margin-bottom: 50px;
+    height: 300px;
+    width: 100%;
+    background: url(/photo-show/earth-g5d46a1434_1280.jpg) center/cover;
+}
+
+.cat {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    clip-path: polygon(0 27%, 50% 0, 100% 27%, 100% 75%, 50% 100%, 0 75%) !important;
+}
+.cat h2 {
+    font-size: 20px;
+}
+
+.sec-2 {
+
+    display: flex;
+    justify-content:space-around;
+    flex-direction: column;
+}
+
+.info-ev h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.info-ev h4 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+
+}
+.info {
+    border-bottom: 1px solid white;
+    margin-bottom: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+ .p {
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column !important;
+}
+
+.reste {
+    border-bottom: 1px solid white;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+h5 {
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+}
+
+.info-ev a {
+    margin-top: 20px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    text-decoration: none !important;
+    color: #000000 !important;
+    padding: 20px 5px;
+    width: 100px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    transition: .2s ease-in-out !important;
+}
+
+.info-ev a:hover {
+    background: transparent !important;
+    color: white !important;
+    border: 1px white solid !important;
+/* transform: translateY(10px) !important; */
+}

@@ -1,8 +1,7 @@
 <div class="container" id="users-info">
 
-    <img src="" alt="">
 
-    <h2>{{Auth::user()->name}}</h2>
+    <h3>{{Auth::user()->name}}</h3>
 
     <p>Inscrit depuis : {{Auth::user()->created_at->diffForHumans()}}</p>
 

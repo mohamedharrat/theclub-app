@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
+use App\Models\Evenements;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +18,20 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $evenements = Evenements::where('date', '<', Carbon::now()->subDays(1))->get();
+
+        // foreach ($evenements as $evenement) {
+        //     $evenement->delete();
+        // }
+
+        $schedule->call(function () {
+            $evenements = Evenements::select()->where('date', '<', date('Y/m/d'));
+
+            foreach ($evenements as $evenement) {
+                $evenement->players()->detach();
+                $evenement->delete();
+            }
+        })->everyMinute();
     }
 
     /**
@@ -25,7 +41,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

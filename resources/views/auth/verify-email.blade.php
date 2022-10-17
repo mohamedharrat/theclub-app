@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{asset('css/auth/verify.css')}}" />
-
-</head>
-<body>
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{session('status')}}
-        </div>
-    @endif
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -39,6 +23,11 @@
         <div class="nav">
                     <x-navbar/>
         </div>
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{session('status')}}
+        </div>
+    @endif
         <div class="verify">
             <div class="card">
                 <h2>verify email address</h2>

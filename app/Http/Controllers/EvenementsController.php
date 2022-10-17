@@ -21,7 +21,7 @@ class EvenementsController extends Controller
     public function index()
     {
         //
-        $evenements = Evenements::all();
+        $evenements =  Evenements::orderby('heure', 'asc')->get();
 
         return view('admin.evenements.evenementsList', [
             'evenements' => $evenements,
@@ -66,10 +66,13 @@ class EvenementsController extends Controller
         $evenement['category_id'] = $request->categories;
         $evenement['region'] = $request->region;
         $evenement['city'] = $request->ville;
-        $evenement['date_heure'] = $request->date_heure;
+        $evenement['date'] = $request->date;
+        $evenement['heure'] = $request->heure;
         $evenement['duree'] = $request->duree;
+        $evenement['lieu'] = $request->lieu;
         $evenement['author_id'] = Auth::user()->id;
         $evenement['adresse'] = $request->adresse;
+        $evenement['players_number'] = $request->player;
 
         $newEvenement = Evenements::create($evenement);
         if ($newEvenement) {
@@ -130,8 +133,10 @@ class EvenementsController extends Controller
         $evenementEdited['category_id'] = $request->categories;
         $evenementEdited['region'] = $request->region;
         $evenementEdited['city'] = $request->ville;
-        $evenementEdited['date_heure'] = $request->date_heure;
+        $evenementEdited['date'] = $request->date;
+        $evenementEdited['heure'] = $request->heure;
         $evenementEdited['duree'] = $request->duree;
+        $evenementEdited['lieu'] = $request->lieu;
         $evenementEdited['author_id'] = Auth::user()->id;
         $evenementEdited['adresse'] = $request->adresse;
 
@@ -154,6 +159,7 @@ class EvenementsController extends Controller
     {
         //
         $evenement = Evenements::find($id);
+        $evenement->players()->detach();
         $evenement->delete();
 
         return back()->with('delete', "L'evenement n° $evenement->id a été supprimé avec succès!");

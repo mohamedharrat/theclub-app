@@ -14,13 +14,16 @@ class Evenements extends Model
     protected $fillable = [
         'title',
         'description',
-        'date_heure',
+        'date',
+        'heure',
         'duree',
         'region',
         'city',
         'adresse',
+        'lieu',
         'author_id',
         'category_id',
+        'players_number',
     ];
 
 
@@ -43,6 +46,13 @@ class Evenements extends Model
     {
         return $this->belongsTo(Ville::class);
     }
+
+    public function players()
+    {
+        return $this->belongsToMany(User::class, 'evenements_user');
+    }
+
+
 
     // public function categories()
     // {

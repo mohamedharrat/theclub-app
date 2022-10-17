@@ -38,8 +38,8 @@
 </div>
 @endif
 <form class="d-flex mb-3 w-50" role="search" action="{{route('users.search')}}" method="GET">
-    <input class="form-control me-2 bg bg-dark text-light border border-dark" type="search" placeholder="Search" aria-label="Search" name="search-user" value="{{request()->q ?? ''}}">
-    <button class="btn btn-outline-dark" type="submit" >
+    <input class="form-control me-2 bg bg-dark text-light border border-dark outline-light" type="search" placeholder="Search" aria-label="Search" name="search-user" value="{{request()->q ?? ''}}">
+    <button class="btn btn-outline-light" type="submit" >
       <i class="bi bi-search"></i>
     </button>
 </form>

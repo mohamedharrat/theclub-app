@@ -26,7 +26,7 @@
         <p>Faire du sport est devenu facile ...</p>
       </div>
       <div class="register">
-        <h2 class="insc">INSCRIPTION</h2>
+        <h2 class="insc">Connecté</h2>
         <i class="bi bi-caret-down-fill"></i>
         <x-navbar/>
       </div>
