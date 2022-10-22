@@ -50,18 +50,34 @@
             <p>Adresse : {{$userEvenements->adresse}}</p>
         </div>
         <h5>Event crée par <br> {{$userEvenements->author->name}}</h5>
+        <div class="list">
+            <h6>Liste des participant</h6>
+            <ul id="players">
+                @foreach ($userEvenements->players as $player)
+                    <li>
+                        {{$player->name}}
+                    </li>
+                    @endforeach
+                </ul>
+        </div>
+            <div class="submit">
 
-        <ul>
-            @foreach ($userEvenements->players as $player)
-                <li>
-                    {{$player->name}}
-                </li>
-            @endforeach
-        </ul>
-        <a href="{{route('userEvenements.participe', ['id' => $userEvenements->id])}}">PARTICIPER</a>
+                <p id="user" hidden>{{Auth::user()->name}}</p>
+                {{-- @if ($player->id == Auth::user()->id) --}}
+                <a id="participe" class="bg bg-success" href="{{route('userEvenements.participe', ['id' => $userEvenements->id])}}">PARTICIPER</a>
+                {{-- @else --}}
+                <a class="bg bg-danger " href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
+                    ANNULER
+                </a>  
+                <form id="delete_players-{{$userEvenements->id}}" action="{{route('userEvenements.annuler',['id'=>$userEvenements->id])}}" method="post">
+                    @csrf
+                    @method('delete')
+                </form>            {{-- @endif --}}
+            </div>
     </div>
 </section>
 </div>
+<script src="{{asset('js/show.js')}}"></script>
 
 </body>
 </html>

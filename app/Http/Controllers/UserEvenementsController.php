@@ -10,6 +10,7 @@ use App\Models\Categories;
 use App\Models\Evenements;
 use Illuminate\Http\Request;
 use App\Models\EvenementsUser;
+use App\Models\UserEvenement;
 use Illuminate\Support\Facades\Auth;
 
 class UserEvenementsController extends Controller
@@ -23,17 +24,41 @@ class UserEvenementsController extends Controller
     {
         //
         // dd(date('Y/m/d'));
+        $foot = $request->foot;
+        $tennis = $request->tennis;
+        $basket = $request->basket;
+        // dd($foot, $tennis, $basket);
+        $userEvenements = Evenements::select()->where('date', date('Y/m/d'))->orderby('heure', 'asc')->get();
+
+
         if ($date = $request->date_filtre) {
 
-            $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
-        } else {
-            $userEvenements = Evenements::select()->where('date', date('Y/m/d'));
+            $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orwhere('category_id', $tennis)->orwhere('category_id', $basket)->orderby('heure', 'asc')->get();
+
+            // if ($foot) {
+            //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orderby('heure', 'asc')->get();
+            // } elseif ($tennis) {
+            //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $tennis)->orderby('heure', 'asc')->get();
+            // } elseif ($basket) {
+            //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $basket)->orderby('heure', 'asc')->get();
+            // } else {
+            //     $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
+            // }
         }
+
+        // dd($userEvenements);
+        // else {
+        //     $userEvenements = Evenements::select()->where('date', date('Y/m/d'));
+        // }
 
 
         // dd($userEvenements);
         return view('usersView.evenementsList', [
             'userEvenements' => $userEvenements,
+            'date' => $date,
+            'foot' => $foot,
+            'tennis' => $tennis,
+            'basket' => $basket,
         ]);
     }
 
@@ -68,6 +93,7 @@ class UserEvenementsController extends Controller
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
+
 
         ]);
 
@@ -139,6 +165,14 @@ class UserEvenementsController extends Controller
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
+            'categories' => 'required',
+            'region' => 'required',
+            'ville' => 'required',
+            'date' => 'required',
+            'heure' => 'required',
+            'duree' => 'required',
+            'lieu' => 'required',
+            'adresse' => 'required',
 
         ]);
 
@@ -185,20 +219,38 @@ class UserEvenementsController extends Controller
     public function participe($id)
     {
         $user_id = Auth::user()->id;
-        // $player = User::find($user_id);
+        $evenements = Evenements::find($id);
+        // $participant = EvenementsUser::select('user_id')->where('user_id', $user_id);
+        $evenements['players_number'];
+        if ($evenements['players_number'] > 0 && $user_id != $evenements['author_id']) {
+            $evenements['players_number'] -= 1;
+            $evenements->players()->attach($user_id);
+        }
+
+        $evenements->save();
+
+        return back()->with("Participe", "vous participez a cet evenement !")->withInput();
+    }
+
+    public function annuler($id)
+    {
+        $user_id = Auth::user()->id;
         $evenement = Evenements::find($id);
-        $evenement['players_number'];
-        if ($evenement['players_number'] > 0 && $user_id != $evenement['author_id']) {
-            $evenement['players_number'] -= 1;
-            $evenement->players()->attach($user_id);
+        // $evenement->players()->detach($user_id);
+        if ($evenement->players()->detach($user_id)) {
+            $evenement['players_number'] += 1;
         }
 
         $evenement->save();
 
+        return back()->with("annuler", "vous participez a cet evenement !")->withInput();
+    }
 
-
-
-
-        return back()->with("Participe", "vous participez a cet evenement !")->withInput();
+    public function mesEvenements()
+    {
+        $userEvenements = Evenements::select()->where('author_id', Auth::user()->id)->orderby('date', 'asc')->get();
+        return view('usersView.mesEvenements', [
+            'userEvenements' => $userEvenements,
+        ]);
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->date('date');
-            $table->time('heure');
+            $table->string('date');
+            $table->string('heure');
             $table->string('duree');
             $table->string('region');
             $table->string('city');

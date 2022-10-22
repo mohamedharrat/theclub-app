@@ -5,13 +5,30 @@
 }
 
 body {
-    /* position: relative; */
+    position: relative;
     display: flex;
     flex-direction: column;
     background: #000000;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
 }
+body::after {
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: " ";
+    background: url(/photo-user_page/pexels-ivan-samkov-4162550.jpg)center/cover;
+    width: 500px;
+    height: 100%;
+    z-index: -1;
+}
+
+
+.yield-user {
+    min-height: 100vh;
+}
+
 
 .addEvents {
     background: white;
@@ -44,7 +61,7 @@ body {
     padding: 20px 0;
    height: 70px; 
    display: flex;
-   justify-content: center;
+   justify-content: space-around;
    align-items: center;
    /* position: relative; */
 }

@@ -3,9 +3,23 @@
 @section('content')
 <form action="" method="get" id="date_filtre">
   @csrf
-  <input type="date" name="date_filtre" id="date" min="" onchange="document.getElementById('date_filtre').submit();" >
-  <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" name="foot">
-<label class="btn btn-outline-success" for="btn-check-outlined">Football</label>
+</form>
+<br>
+<form action="" method="get" id="sport_filtre">
+  <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
+  <button type="submit" class="btn btn-dark">filtre</button>
+
+<br>
+<br>
+<input type="checkbox" name="foot" class="btn-check" id="foot" value="1" <?php echo $foot != 0 ? "checked" : "" ?>>
+<label class="btn btn-outline-success" for="foot">Football</label>
+
+<input type="checkbox" name="tennis" class="btn-check" id="tennis" value="2" <?php echo $tennis != 0 ? "checked" : "" ?>>
+<label class="btn btn-outline-warning" for="tennis">Tennis</label>
+
+<input type="checkbox" name="basket" class="btn-check" id="basket" value="3"<?php echo $basket != 0 ? "checked" : "" ?>>
+<label class="btn btn-outline-primary" for="basket">Basket</label>
+<br>
 </form>
 @if (session('delete'))
 <div class="alert alert-success">
@@ -42,7 +56,7 @@
 </div>
 @endif 
 {{-- <a href=""></a> --}}
-<a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  Add Evenements</a>
+<a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
 <div class="list">
   {{-- {{$evenements->links()}} --}}
 
@@ -88,6 +102,7 @@
       @endforeach
     </div>
 
+    
       {{-- <div>
     <x-nav-user/>
   </div> --}}

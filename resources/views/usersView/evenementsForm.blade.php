@@ -29,7 +29,7 @@
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="player">nombre de joueur</label>
-                    <input type="number" name="player" id="player" class="bg bg-dark text-light">
+                    <input type="number" name="player" id="player" class="bg bg-dark text-light" >
                 </div>
                 
                 <div class="card mb-3 bg bg-dark ">
@@ -64,7 +64,7 @@
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="lieu">lieu de l'évenement</label>
-                    <input type="text" class="bg bg-dark text-light" name="lieu" id="lieu">
+                    <input type="text" class="bg bg-dark text-light" name="lieu" id="lieu" >
                 </div>
 
                 {{-- <div class="card mb-3"> --}}
@@ -82,17 +82,17 @@
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="date">date de l'évenement</label>
-                    <input type="date" class="bg bg-dark text-light" name="date" id="date" min="{{now()}}">
+                    <input type="date" class="bg bg-dark text-light" name="date" id="date" min="{{now()}}" >
                 </div>
 
                 <div class="card mb-3 bg bg-dark">
                         <label for="heure">heure de l'évenement</label>
-                        <input type="time" class="bg bg-dark text-light" name="heure" id="heure">
+                        <input type="time" class="bg bg-dark text-light" name="heure" id="heure" >
                     </div>
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="duree">Durée de l'évenement</label>
-                    <input type="time" name="duree" id="duree" class="bg bg-dark text-light">
+                    <input type="time" name="duree" id="duree" class="bg bg-dark text-light" >
                 </div>
             </div>
         </div>

@@ -69,7 +69,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('userEvenements', UserEvenementsController::class);
     Route::delete('userEvenements/{userEvenement}', [UserEvenementsController::class, 'destroy'])->name('userEvenements.destroy');
     Route::get('/userEvenements/{id}/participe', [UserEvenementsController::class, 'participe'])->name('userEvenements.participe');
+    Route::delete('/userEvenements/{id}/annuler', [UserEvenementsController::class, 'annuler'])->name('userEvenements.annuler');
     Route::get('userEvenements/{userEvenement}/edit', [UserEvenementsController::class, 'edit'])->name('userEvenements.edit');
     Route::post('userEvenements/{userEvenement}', [UserEvenementsController::class, 'update'])->name('userEvenements.update');
 });
 // Route::get('userEvenements/{userEvenement}/show', [UserEvenementsController::class, 'show'])->name('userEvenements.show');
+
+Route::get('mesEvenements', [UserEvenementsController::class, 'mesEvenements'])->name('mesEvenements')->middleware(['auth', 'verified']);
+Route::get('/profil', function () {
+    return view('usersView.profil');
+})->middleware(['auth', 'verified']);

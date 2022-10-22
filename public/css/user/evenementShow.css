@@ -94,6 +94,29 @@ h5 {
     margin-top: 20px;
     color: white;
     text-align: center;
+    border-bottom: 1px solid white;
+    padding: 20px 0;
+}
+.list {
+    margin-top: 20px;
+    /* text-align: center; */
+    border-bottom: white 1px solid;
+}
+
+.list h6{
+    color: white;
+    text-align: center;
+}
+
+.info-ev li {
+    list-style-type:disc;
+    color: white;
+}
+.submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-ev a {

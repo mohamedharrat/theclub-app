@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
         // }
 
         $schedule->call(function () {
-            $evenements = Evenements::select()->where('date', '<', date('Y/m/d'));
+            $evenements = Evenements::select('date')->where('date', '<', date('Y/m/d'));
 
             foreach ($evenements as $evenement) {
                 $evenement->players()->detach();
