@@ -22,7 +22,7 @@
             <nav class="">
                 <div class="nav-nav">  
                     
-                    <p class="p-nav">{{ Auth::user()->name }} : {{Auth::user()->role}}</p>
+                    <p class="p-nav">{{ Auth::user()->name }} : connecté</p>
                     <div class="nav-1">
 
                         @if (Auth::user()->role =='admin')

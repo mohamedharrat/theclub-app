@@ -24,7 +24,12 @@
     
                 <div class="card mb-3 bg bg-dark">
                     <label for="title">Titre</label>
-                    <input class="bg bg-dark text-light" type="text" name="title" id="title">
+                    <input class="bg bg-dark text-light" type="text" name="title" id="title" @error('title')is-invalid @enderror">
+                    @error('title')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
 
                 <div class="card mb-3 bg bg-dark">

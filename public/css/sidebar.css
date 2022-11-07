@@ -17,7 +17,7 @@
     left: 0;
     width: 100%;
     height: 500px;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.762);
     border-radius: 10px;
 
 }
@@ -28,7 +28,6 @@
     color: white;
     text-align: center;
     line-height: 70px;
-    background-color: #333;
     user-select: none;
     /* height: 100px ; */
 }

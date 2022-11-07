@@ -1,7 +1,11 @@
-@extends('layouts.dashboard')
+@extends('layouts.userspage')
 
 @section('content')
-
+@if (session('error'))
+<div class="alert alert-danger">
+    {{session('error')}}
+</div>
+@endif
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -12,14 +16,14 @@
 </div>
 @endif
 
-<div class="container bg bg-dark">
+<div class="container ">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card bg bg-dark text-light">
-                <div class="card-header">UPDATE</div>
+                <div class="card-header">UPDATE PROFIL</div>
 
                 <div class="card-body">
-                    <form method="post" action="{{route('users.update',['user' => $user->id])}}">
+                    <form method="POST" action="{{route('updateProfil',['user'=>Auth::user()->id])}}">
                         @csrf
                         
 
@@ -27,7 +31,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom et Prénom') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +45,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Adresse Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -52,16 +56,10 @@
                         </div>
 
 
-                        {{-- <div class="row ml-5">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" name="admin"  role="switch" id="admin">
-                              <label class="form-check-label" for="admin">Admin</label>
-                            </div>
-                          </div> --}}
-
+                      
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('save') }}
                                 </button>
                             </div>

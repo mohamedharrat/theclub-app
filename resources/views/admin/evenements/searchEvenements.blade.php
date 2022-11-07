@@ -1,60 +1,18 @@
 @extends('layouts.dashboard')
 
 @section('content')
-
-
-@if (session('delete'))
-<div class="alert alert-success">
-    {{session('delete')}}
-</div>  
-@endif
-
-@if (session('Update'))
-<div class="alert alert-success">
-    {{session('Update')}}
+@if ($results->count() == 0)
+<div class="alert alert-danger">
+    <h3>Aucun résultat  trouvé!</h3>
 </div>
-@endif
-@if (session('inscription'))
+@else
 <div class="alert alert-success">
-    {{session('inscription')}}
+<h3> {{$results->count()}} résultat(s)  trouvé(s)!</h3>
 </div>
 @endif
 
-@if (session('message'))
-<div class="alert alert-success">
-    {{session('message')}}
-</div>
-@endif
-
-@if (session('error'))
-<div class="alert alert-success">
-    {{session('error')}}
-</div>
-@endif
-
-@if (session('status'))
-<div class="alert alert-success">
-    {{session('status')}}
-</div>
-@endif
-@if (session('create'))
-<div class="alert alert-success">
-    {{session('create')}}
-</div>
-@endif
-<a class="addEvents"  href="{{route('evenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  Add Evenements</a>
-<div class="list">
-
-  <form class="d-flex mb-3 w-50" role="search" action="{{route('evenements.search')}}" method="GET">
-    <input class="form-control me-2 bg bg-dark text-light border border-dark outline-light" type="search" placeholder="Search" aria-label="Search" name="search-evenements" value="{{request()->q ?? ''}}">
-    <button class="btn btn-outline-light" type="submit" >
-      <i class="bi bi-search"></i>
-    </button>
-</form>
-  {{-- {{$evenements->links()}} --}}
-
-  @foreach ($evenements as $evenement)
-      <div class="evenement">
+@foreach ($results as $evenement)
+<div class="evenement">
     @if ($evenement->category->name == "tennis")
     <div class="heure" id="heure" style="background: url('/photo-event/tennis.jpg')center/cover">
       <h2>{{$evenement->heure}}</h2> 
@@ -77,8 +35,6 @@
           <p>durée - {{$evenement->duree}} h</p>
         </div>
         <div class="show">
-          <a href="{{route('evenements.show', ['evenement'=>$evenement->id]) }}"><i class="bi bi-zoom-in"></i></a>
-
             <a href="{{route('evenements.edit',['evenement'=>$evenement->id])}}" style="text-decoration: none">
                 <i class="bi bi-pencil-square px-1"></i>
             </a>
@@ -93,7 +49,5 @@
         </div>
       </div>
       
-      @endforeach
-    </div>
-
+@endforeach
 @endsection

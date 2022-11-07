@@ -16,6 +16,8 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
       />
       {{-- <link rel="stylesheet" href="{{asset('css/navbar-accueil.css')}}" /> --}}
+      <link rel="stylesheet" href="{{asset('css/navbar-layaouts.css')}}" />
+
       <link rel="stylesheet" href="{{asset('css/auth/verify.css')}}" />
     
     </head>
@@ -24,10 +26,10 @@
                     <x-navbar/>
         </div>
         @if (session('status'))
-        <div class="alert alert-success">
+        <div class="alert alert-success row">
             {{session('status')}}
         </div>
-    @endif
+        @endif
         <div class="verify">
             <div class="card">
                 <h2>verify email address</h2>

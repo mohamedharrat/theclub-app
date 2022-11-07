@@ -6,28 +6,41 @@
 
 
 body {
-    background: #000000;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
-height: 100%;
-width: 100%;
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 /* overflow: hidden; */
 }
 
 .addEvents {
-    margin-top: 20px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 60px;
     background: white;
     border-radius: 20px;
     color: #434343;
     text-decoration: none;
-    padding: 10px;
-    /* position: fixed; */
-    /* margin-top: 80px; */
-    margin-left: 50%;
     transform: translate(-50%);
 }
 
 .addEvents:hover {
     color: white;
     background: #434343;
+}
+
+.admin-cont {
+    display: flex;
+}
+
+.side {
+    width: 300px;
+    position: fixed;
+}
+
+.content {
+    margin-top: 60px;
+    width: 100%;
+    margin-left: 300px;
 }

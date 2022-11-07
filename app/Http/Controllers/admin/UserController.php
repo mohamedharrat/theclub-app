@@ -7,6 +7,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\UserCreateNotification;
+use App\Models\AideAdmin;
+use App\Models\Evenements;
+use App\Models\Reponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -47,8 +50,8 @@ class UserController extends Controller
     {
         //
         $validate = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
             // 'role' => ['required', 'string'],
         ]);
 
@@ -108,8 +111,8 @@ class UserController extends Controller
 
         $user = User::find($id);
         $validate = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
             // 'role' => ['required', 'string'],
 
 
@@ -119,16 +122,16 @@ class UserController extends Controller
         $register = $validate;
         $register['name'] = $request->name;
         $register['email'] = $request->email;
-        if ($request['admin']) {
-            $register['role'] = 'admin';
-        }
+        // if ($request['admin']) {
+        //     $register['role'] = 'admin';
+        // }
         $user->update($register);
         // dd($user);
         // dd($user);
         if ($user) {
-            return redirect('admin/users')->with('compteUpdate', 'Votre compte a été bien mis à jour!');
+            return redirect('admin/users')->with('compteUpdate', 'le compte a été bien mis à jour!');
         } else {
-            return back()->with("errorRegister", "registration failed")->withInput();
+            return back()->with("errorRegister", "registration failed");
         }
     }
 
@@ -138,11 +141,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
+        $user = User::find($id);
+        // dd($user);
+        $aideAdmins = AideAdmin::all()->where('author_id', $user->id);
+        foreach ($aideAdmins as $aideAdmin) {
+            // dd($aideAdmin);
+            $reponses = Reponse::all()->where('aideAdmin_id', $aideAdmin->id);
+            foreach ($reponses as $reponse) {
 
+                $reponse->delete();
+            }
+            $aideAdmin->delete();
+        }
         // $user = User::all();
+        $evenements = Evenements::all()->where('author_id', $user->id);
+        foreach ($evenements as $evenement) {
+
+            $evenement->delete();
+        }
         $user->delete();
         return back()->with('delete', "L'utilisateur n° $user->id a été supprimé avec succès!");
     }

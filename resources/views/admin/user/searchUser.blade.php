@@ -28,18 +28,7 @@
     @endif
 
     
-    <table class="table table-bordered border-dark">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>name</th>
-                <th>email</th>
-                <th>role</th>
-                <th>creation date</th>
-                <th>action</th>
-            </tr>
-        </thead>
-        <tbody>
+   
             @if ($results->count() == 0)
                 <div class="alert alert-danger">
                     <h3>Aucun résultat  trouvé!</h3>
@@ -49,33 +38,29 @@
                 <h3> {{$results->count()}} résultat(s)  trouvé(s)!</h3>
             </div>
             @foreach ($results as $user)
-            <tr>
-                <td>{{$user->id}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->role}}</td>
-                <td>{{$user->created_at}}</td>
-                <td>
+            <div class="card bg bg-dark text-light mb-5">
+                <div class="card-header">{{$user->id}}.  {{$user->name}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{$user->email}}</h5>
+                  <p class="card-text">Rôle : {{$user->role}} / inscrit depuis :  {{$user->created_at}}</p>
+                    {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                     <a href="{{route('users.edit',['user'=>$user->id])}}" style="text-decoration: none">
-                        <i class="bi bi-pencil-square px-1"></i>
+                        <i class="bi bi-pencil-square px-1"></i> Modifier
                     </a>
                     <a href="#" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')){document.getElementById('delete-{{$user->id}}').submit()}" style="text-decoration: none">
-                        <i class="bi bi-trash px-1"></i>
+                        <i class="bi bi-trash px-1"></i> Supprimer
                     </a>
-                    {{-- <a href="{{route('users.view',['id'=>$user->id])}}" style="text-decoration: none">
-                        <i class="bi bi-eye"></i>
-                    </a> --}}
-
+                   
+        
                     <form id="delete-{{$user->id}}" action="{{route('users.destroy',['user'=>$user->id])}}" method="post">
                         @csrf
                         @method('delete')
                     </form>
-                </td>
-
+                </div>
+              </div>
             </tr>
             @endforeach
             @endif            
-        </tbody>
-    </table>
+       
     {{$results->links()}}
 @endsection

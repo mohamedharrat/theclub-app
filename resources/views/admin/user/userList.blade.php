@@ -43,49 +43,7 @@
       <i class="bi bi-search"></i>
     </button>
 </form>
-{{-- <table class="table table-bordered border-dark text-center" > --}}
-    {{-- {{$users->links()}} --}}
-{{-- 
 
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>name</th>
-            <th>email</th>
-            <th>role</th>
-            <th>creation date</th>
-            <th>action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($users as $user)
-            <tr>
-                <td>{{$user->id}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->role}}</td>
-                <td>{{$user->created_at}}</td>
-                <td>
-                    <a href="{{route('users.edit',['user'=>$user->id])}}" style="text-decoration: none">
-                        <i class="bi bi-pencil-square px-1"></i>
-                    </a>
-                    <a href="#" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')){document.getElementById('delete-{{$user->id}}').submit()}" style="text-decoration: none">
-                        <i class="bi bi-trash px-1"></i>
-                    </a>
-                   
-
-                    <form id="delete-{{$user->id}}" action="{{route('users.destroy',['user'=>$user->id])}}" method="post">
-                        @csrf
-                        @method('delete')
-                    </form>
-                </td>
-
-            </tr>
-        @endforeach
-    </tbody>
-</table> --}}
-
-    {{-- {{$users->links()}} --}}
 
     @foreach ($users as $user)
     <div class="card bg bg-dark text-light mb-5">

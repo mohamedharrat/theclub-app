@@ -56,6 +56,17 @@
                 @foreach ($userEvenements->players as $player)
                     <li>
                         {{$player->name}}
+                        <form id="delete_player-{{$player->id}}" action="{{route('userEvenements.deletePlayers',['id'=>$userEvenements->id])}}" method="post">
+                            <input type="text" name="player" value="{{$player->id}}" hidden>
+                            <input type="text" name="evenement" value="{{$userEvenements->id}}" hidden>
+                            @if ($userEvenements->author_id == Auth::user()->id)
+                            <button  class="bg bg-danger" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$player->id}}').submit()}" style="text-decoration: none">
+                                <i class="bi bi-trash px-1"></i>
+                            </button>
+                            @csrf
+                           @method('delete')
+                        </form>
+                        @endif
                     </li>
                     @endforeach
                 </ul>
@@ -66,7 +77,7 @@
                 {{-- @if ($player->id == Auth::user()->id) --}}
                 <a id="participe" class="bg bg-success" href="{{route('userEvenements.participe', ['id' => $userEvenements->id])}}">PARTICIPER</a>
                 {{-- @else --}}
-                <a class="bg bg-danger " href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
+                <a id="annuler" class="bg bg-danger " href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
                     ANNULER
                 </a>  
                 <form id="delete_players-{{$userEvenements->id}}" action="{{route('userEvenements.annuler',['id'=>$userEvenements->id])}}" method="post">

@@ -42,7 +42,7 @@
     @if ($userEvenement)
         
     <div class="evenement">
-        <h6 class="text-light p-1">{{$userEvenement->date}}</h6>
+        <h6 class=" text-center text-light p-1">{{$userEvenement->date}}</h6>
         @if ($userEvenement->category->name == "tennis")
         <div class="heure" id="heure" style="background: url('/photo-event/tennis.jpg')center/cover">
             <h2>{{$userEvenement->heure}}</h2> 

@@ -10,6 +10,12 @@
                 <div class="card-body">
                     <h5 class="card-header">Crée votre évenement </h5>
                     <div class="card mb-3 bg bg-dark">
+                        <label for="user">Utilisateur</label>
+                        <select name="user" id="user" class="bg bg-dark text-light" >
+                            @foreach ($users as $user)
+                            <option value="{{$user->id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
                         <label for="category">Catégories</label>
                         <select class="custom-select bg bg-dark text-light" name="categories" id="categories">
                             @foreach ($categories as $category)

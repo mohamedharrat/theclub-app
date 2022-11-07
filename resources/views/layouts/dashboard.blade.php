@@ -16,19 +16,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   </head>
   <body>
-    <div class="row">
+    
           <x-navbar-layouts/>
-    </div>
-<div class="row" >
-  <div class="col-3 " >
+  
+<div class="admin-cont" >
+  <div class="side" >
       <x-sidebar/> 
   </div>
-  <div class="col-9  mt-5" >
+  <div class="content" >
       @yield('content')
-  </div>
-  
-
-   
+  </div>   
 </div>
     
     <!-- JavaScript Bundle with Popper -->

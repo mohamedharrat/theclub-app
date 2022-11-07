@@ -24,17 +24,17 @@ class UserEvenementsController extends Controller
     {
         //
         // dd(date('Y/m/d'));
-        $foot = $request->foot;
-        $tennis = $request->tennis;
-        $basket = $request->basket;
+        $category = $request->category;
         // dd($foot, $tennis, $basket);
         $userEvenements = Evenements::select()->where('date', date('Y/m/d'))->orderby('heure', 'asc')->get();
 
 
         if ($date = $request->date_filtre) {
-
-            $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orwhere('category_id', $tennis)->orwhere('category_id', $basket)->orderby('heure', 'asc')->get();
-
+            if (isset($category)) {
+                $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->orderby('heure', 'asc')->get();
+            } else {
+                $userEvenements = Evenements::select()->where('date', date('Y/m/d'))->orderby('heure', 'asc')->get();
+            }
             // if ($foot) {
             //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orderby('heure', 'asc')->get();
             // } elseif ($tennis) {
@@ -56,9 +56,7 @@ class UserEvenementsController extends Controller
         return view('usersView.evenementsList', [
             'userEvenements' => $userEvenements,
             'date' => $date,
-            'foot' => $foot,
-            'tennis' => $tennis,
-            'basket' => $basket,
+            'category' => $category,
         ]);
     }
 
@@ -111,7 +109,7 @@ class UserEvenementsController extends Controller
 
         $newEvenement = Evenements::create($evenement);
         if ($newEvenement) {
-            return redirect('/userEvenements');
+            return redirect('/userEvenements')->with('create', 'évènement crée avec succès !');
         }
     }
 
@@ -194,7 +192,7 @@ class UserEvenementsController extends Controller
 
         if ($evenement) {
 
-            return view('admin.evenements.evenementsList')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
+            return redirect('userEvenements')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
         }
     }
 
@@ -222,7 +220,7 @@ class UserEvenementsController extends Controller
         $evenements = Evenements::find($id);
         // $participant = EvenementsUser::select('user_id')->where('user_id', $user_id);
         $evenements['players_number'];
-        if ($evenements['players_number'] > 0 && $user_id != $evenements['author_id']) {
+        if ($evenements['players_number'] > 0) {
             $evenements['players_number'] -= 1;
             $evenements->players()->attach($user_id);
         }
@@ -243,7 +241,24 @@ class UserEvenementsController extends Controller
 
         $evenement->save();
 
-        return back()->with("annuler", "vous participez a cet evenement !")->withInput();
+        return back()->with("annuler", "vous ne participez plus a cet evenement !")->withInput();
+    }
+
+    public function deletePlayers($id, Request $request)
+    {
+        $player_id = $request->player;
+
+        $evenement = Evenements::find($id);
+
+
+
+
+        if ($evenement->players()->detach($player_id)) {
+            $evenement['players_number'] += 1;
+        }
+        $evenement->save();
+
+        return back()->with("annuler", "participant supprimé !")->withInput();
     }
 
     public function mesEvenements()
@@ -252,5 +267,38 @@ class UserEvenementsController extends Controller
         return view('usersView.mesEvenements', [
             'userEvenements' => $userEvenements,
         ]);
+    }
+
+    public function editProfil($id)
+    {
+        $user = User::find($id);
+        return view('usersView.editProfil', ['user' => $user]);
+    }
+
+    public function updateProfil(Request $request, $id)
+    {
+
+        $user = User::find($id);
+        $validate = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            // 'role' => ['required', 'string'],
+
+
+        ]);
+
+
+        $register = $validate;
+        $register['name'] = $request->name;
+        $register['email'] = $request->email;
+
+        $user->update($register);
+        // dd($user);
+        // dd($user);
+        if ($user) {
+            return redirect('profil')->with('compteUpdate', 'Votre compte a été bien mis à jour!');
+        } else {
+            return back()->with("errorRegister", "registration failed")->withInput();
+        }
     }
 }

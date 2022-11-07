@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Region;
 use App\Models\categories;
 use App\Models\Evenements;
+use App\Models\User;
 use App\Models\ville;
 
 use function Ramsey\Uuid\v1;
@@ -36,6 +37,7 @@ class EvenementsController extends Controller
     public function create()
     {
         //
+        $users = User::all();
         $categories = categories::select('name', 'id')->get();
         $regions = Region::select('name', 'id')->oldest('name')->get();
         $villes = Ville::select('name', 'id')->oldest('name')->get();
@@ -44,6 +46,7 @@ class EvenementsController extends Controller
             'categories' => $categories,
             'regions' => $regions,
             'villes' => $villes,
+            'users' => $users,
         ]);
     }
 
@@ -70,13 +73,15 @@ class EvenementsController extends Controller
         $evenement['heure'] = $request->heure;
         $evenement['duree'] = $request->duree;
         $evenement['lieu'] = $request->lieu;
-        $evenement['author_id'] = Auth::user()->id;
+        $evenement['author_id'] = $request->user;
         $evenement['adresse'] = $request->adresse;
         $evenement['players_number'] = $request->player;
 
         $newEvenement = Evenements::create($evenement);
         if ($newEvenement) {
-            return view('admin.evenements.evenementsList');
+            return redirect('admin/evenements')->with('create', 'évènement crée avec succès !');
+        } else {
+            return back()->with('errorRegister', "erreur à la création de l'évènement");
         }
     }
 
@@ -89,6 +94,11 @@ class EvenementsController extends Controller
     public function show($id)
     {
         //
+        $evenements = Evenements::find($id);
+
+        return view('admin.evenementShow', [
+            'evenements' => $evenements,
+        ]);
     }
 
     /**
@@ -122,7 +132,7 @@ class EvenementsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $evenement = Evenements::find($id);
+        $evenements = Evenements::find($id);
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
@@ -140,12 +150,12 @@ class EvenementsController extends Controller
         $evenementEdited['author_id'] = Auth::user()->id;
         $evenementEdited['adresse'] = $request->adresse;
 
-        $evenement->update($evenementEdited);
+        $evenements->update($evenementEdited);
 
 
-        if ($evenement) {
+        if ($evenements) {
 
-            return view('admin.evenements.evenementsList')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
+            return view('admin.evenements.evenementsList', ['evenement' => $evenements])->with('update', "L'évenement n° $evenements->id a été mis à jour avec succès!");
         }
     }
 
@@ -163,5 +173,13 @@ class EvenementsController extends Controller
         $evenement->delete();
 
         return back()->with('delete', "L'evenement n° $evenement->id a été supprimé avec succès!");
+    }
+
+    public function search()
+    {
+
+        $search = request()->input('search-evenements');
+        $results = Evenements::where('lieu', 'like', "%$search%")->orwhere('city', 'like', "%$search%")->orwhere('region', 'like', "%$search%")->orwhere('date', 'like', "%$search%")->paginate(5);
+        return view('admin.evenements.searchEvenements', ['results' => $results]);
     }
 }

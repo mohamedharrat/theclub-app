@@ -4,7 +4,7 @@
       <i class="bi bi-house-door-fill"></i>
       <p>Accueil</p>
     </a>
-    <a href="">
+    <a href="{{route('aideAdmin.create')}}">
       <i class="bi bi-question-circle"></i>
       <p>Aide</p>
     </a>

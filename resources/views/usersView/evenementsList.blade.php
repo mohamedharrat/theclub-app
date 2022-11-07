@@ -7,23 +7,29 @@
 <br>
 <form action="" method="get" id="sport_filtre">
   <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
-  <button type="submit" class="btn btn-dark">filtre</button>
+  <button type="submit" class="btn btn-light">filtre</button>
 
 <br>
 <br>
-<input type="checkbox" name="foot" class="btn-check" id="foot" value="1" <?php echo $foot != 0 ? "checked" : "" ?>>
+<input type="radio" name="category" class="btn-check" id="foot" value="1" <?php echo $category == 1 ? "checked" : "" ?>>
 <label class="btn btn-outline-success" for="foot">Football</label>
 
-<input type="checkbox" name="tennis" class="btn-check" id="tennis" value="2" <?php echo $tennis != 0 ? "checked" : "" ?>>
+<input type="radio" name="category" class="btn-check" id="tennis" value="2" <?php echo $category == 2 ? "checked" : "" ?>>
 <label class="btn btn-outline-warning" for="tennis">Tennis</label>
 
-<input type="checkbox" name="basket" class="btn-check" id="basket" value="3"<?php echo $basket != 0 ? "checked" : "" ?>>
-<label class="btn btn-outline-primary" for="basket">Basket</label>
+<input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
+<label class="btn btn-outline-danger" for="basket">Basket</label>
 <br>
 </form>
 @if (session('delete'))
 <div class="alert alert-success">
     {{session('delete')}}
+</div>  
+@endif
+
+@if (session('create'))
+<div class="alert alert-success">
+    {{session('create')}}
 </div>  
 @endif
 
@@ -45,7 +51,7 @@
 @endif
 
 @if (session('error'))
-<div class="alert alert-success">
+<div class="alert alert-danger">
     {{session('error')}}
 </div>
 @endif
@@ -61,7 +67,8 @@
   {{-- {{$evenements->links()}} --}}
 
   @foreach ($userEvenements as $userEvenement)
-      <div class="evenement">
+  
+      <div class="evenement" id="evenement">
     @if ($userEvenement->category->name == "tennis")
     <div class="heure" id="heure" style="background: url('/photo-event/tennis.jpg')center/cover">
       <h2>{{$userEvenement->heure}}</h2> 
@@ -83,6 +90,10 @@
           </p>
           <p>durée - {{$userEvenement->duree}} h</p>
         </div>
+        <div class="fav">
+          <input  type="checkbox" name="favorie" class="btn-check" id="favorie" >
+          <label class="btn btn-outline-danger" for="favorie"><i class="bi bi-suit-heart-fill">3</i></label>
+        </div>
         <div class="show">
 
           <a href="{{route('userEvenements.show', ['userEvenement'=>$userEvenement->id]) }}"><i class="bi bi-zoom-in"></i></a>
@@ -98,6 +109,7 @@
         </form>
         </div>
       </div>
+      
       
       @endforeach
     </div>
