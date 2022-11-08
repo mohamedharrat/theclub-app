@@ -69,7 +69,11 @@
         </div>
         @endif
         <div class="info">
-          <p class="nbr">{{$evenement->players_number}}-place</p>
+          @if ($evenement->players_number == 0)
+              <p class="bg bg-danger text-center nbr"> évènement victime de son succès</p>
+              @else
+              <p class="nbr">{{$evenement->players_number}}-place</p>
+              @endif
           <h3 id="category">{{$evenement->category->name}}</h3>
           <p>
             {{$evenement->lieu}} - {{$evenement->adresse}}

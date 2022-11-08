@@ -25,15 +25,17 @@ class UserEvenementsController extends Controller
         //
         // dd(date('Y/m/d'));
         $category = $request->category;
+        $date = date('Y-m-d');
         // dd($foot, $tennis, $basket);
-        $userEvenements = Evenements::select()->where('date', date('Y/m/d'))->orderby('heure', 'asc')->get();
+        $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
 
 
-        if ($date = $request->date_filtre) {
+        if ($request->date_filtre) {
+            $date = $request->date_filtre;
             if (isset($category)) {
                 $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->orderby('heure', 'asc')->get();
             } else {
-                $userEvenements = Evenements::select()->where('date', date('Y/m/d'))->orderby('heure', 'asc')->get();
+                $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
             }
             // if ($foot) {
             //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orderby('heure', 'asc')->get();
@@ -47,9 +49,9 @@ class UserEvenementsController extends Controller
         }
 
         // dd($userEvenements);
-        // else {
-        //     $userEvenements = Evenements::select()->where('date', date('Y/m/d'));
-        // }
+        else {
+            $userEvenements = Evenements::all()->where('date', date('Y-m-d'));
+        }
 
 
         // dd($userEvenements);
@@ -258,7 +260,7 @@ class UserEvenementsController extends Controller
         }
         $evenement->save();
 
-        return back()->with("annuler", "participant supprimé !")->withInput();
+        return back()->with("deletePlayer", "participant supprimé !")->withInput();
     }
 
     public function mesEvenements()

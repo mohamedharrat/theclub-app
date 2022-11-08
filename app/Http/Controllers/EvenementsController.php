@@ -95,9 +95,11 @@ class EvenementsController extends Controller
     {
         //
         $evenements = Evenements::find($id);
+        $users = User::all();
 
-        return view('admin.evenementShow', [
+        return view('admin.evenements.evenementShow', [
             'evenements' => $evenements,
+            'users' => $users,
         ]);
     }
 
@@ -181,5 +183,39 @@ class EvenementsController extends Controller
         $search = request()->input('search-evenements');
         $results = Evenements::where('lieu', 'like', "%$search%")->orwhere('city', 'like', "%$search%")->orwhere('region', 'like', "%$search%")->orwhere('date', 'like', "%$search%")->paginate(5);
         return view('admin.evenements.searchEvenements', ['results' => $results]);
+    }
+
+    public function ajoutPlayer($id, Request $request)
+    {
+        $user_id = $request->user;
+        // dd($user_id);
+        $evenements = Evenements::find($id);
+        // $participant = EvenementsUser::select('user_id')->where('user_id', $user_id);
+        // $evenements['players_number'];
+        if ($evenements['players_number'] > 0) {
+            $evenements['players_number'] -= 1;
+            $evenements->players()->attach($user_id);
+        }
+
+        $evenements->save();
+
+        return back()->with("ajouter", "utilisateur ajouté avec succès !");
+    }
+
+    public function adminDeletePlayers($id, Request $request)
+    {
+        $player_id = $request->player;
+
+        $evenement = Evenements::find($id);
+
+
+
+
+        if ($evenement->players()->detach($player_id)) {
+            $evenement['players_number'] += 1;
+        }
+        $evenement->save();
+
+        return back()->with("annuler", "participant supprimé !");
     }
 }

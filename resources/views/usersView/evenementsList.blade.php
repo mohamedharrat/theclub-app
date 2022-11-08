@@ -1,26 +1,7 @@
 @extends('layouts.userspage')
 
 @section('content')
-<form action="" method="get" id="date_filtre">
-  @csrf
-</form>
-<br>
-<form action="" method="get" id="sport_filtre">
-  <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
-  <button type="submit" class="btn btn-light">filtre</button>
 
-<br>
-<br>
-<input type="radio" name="category" class="btn-check" id="foot" value="1" <?php echo $category == 1 ? "checked" : "" ?>>
-<label class="btn btn-outline-success" for="foot">Football</label>
-
-<input type="radio" name="category" class="btn-check" id="tennis" value="2" <?php echo $category == 2 ? "checked" : "" ?>>
-<label class="btn btn-outline-warning" for="tennis">Tennis</label>
-
-<input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
-<label class="btn btn-outline-danger" for="basket">Basket</label>
-<br>
-</form>
 @if (session('delete'))
 <div class="alert alert-success">
     {{session('delete')}}
@@ -61,6 +42,26 @@
     {{session('status')}}
 </div>
 @endif 
+<form action="" method="get" id="date_filtre">
+  @csrf
+</form>
+<br>
+<form action="" method="get" id="sport_filtre">
+  <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
+  <button type="submit" class="btn btn-light">filtre</button>
+
+<br>
+<br>
+<input type="radio" name="category" class="btn-check" id="foot" value="1" <?php echo $category == 1 ? "checked" : "" ?>>
+<label class="btn btn-outline-success" for="foot">Football</label>
+
+<input type="radio" name="category" class="btn-check" id="tennis" value="2" <?php echo $category == 2 ? "checked" : "" ?>>
+<label class="btn btn-outline-warning" for="tennis">Tennis</label>
+
+<input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
+<label class="btn btn-outline-danger" for="basket">Basket</label>
+<br>
+</form>
 {{-- <a href=""></a> --}}
 <a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
 <div class="list">
@@ -83,7 +84,12 @@
         </div>
         @endif
         <div class="info">
+          @if ($userEvenement->players_number == 0)
+              
+          <p class="nbr bg bg-danger p-2">évènement victime de son succès</p>
+          @else
           <p class="nbr">{{$userEvenement->players_number}}-place</p>
+          @endif
           <h3 id="category">{{$userEvenement->category->name}}</h3>
           <p>
             {{$userEvenement->lieu}} - {{$userEvenement->adresse}}
@@ -97,16 +103,19 @@
         <div class="show">
 
           <a href="{{route('userEvenements.show', ['userEvenement'=>$userEvenement->id]) }}"><i class="bi bi-zoom-in"></i></a>
+          @if (Auth::user()->id == $userEvenement->author_id)
+              
           <a href="{{route('userEvenements.edit',['userEvenement'=>$userEvenement->id])}}" style="text-decoration: none">
             <i class="bi bi-pencil-square px-1"></i>
-        </a>
+          </a>
           <a href="#" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet événement?')){document.getElementById('delete-{{$userEvenement->id}}').submit()}" style="text-decoration: none">
             <i class="bi bi-trash px-1"></i>
-        </a>  
-        <form id="delete-{{$userEvenement->id}}" action="{{route('userEvenements.destroy',['userEvenement'=>$userEvenement->id])}}" method="post">
+          </a>  
+          <form id="delete-{{$userEvenement->id}}" action="{{route('userEvenements.destroy',['userEvenement'=>$userEvenement->id])}}" method="post">
             @csrf
             @method('delete')
-        </form>
+          </form>
+          @endif
         </div>
       </div>
       

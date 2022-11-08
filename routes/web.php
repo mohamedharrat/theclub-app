@@ -59,6 +59,8 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware(['admin', 'verified']);;
 
         Route::resource('evenements', EvenementsController::class)->except(['delete']);
+        Route::get('/evenements/{id}/ajoutPlayer', [EvenementsController::class, 'ajoutPlayer'])->name('evenements.ajoutPlayer');
+        Route::delete('userEvenements/{id}/adminDeletePlayers', [EvenementsController::class, 'adminDeletePlayers'])->name('evenements.adminDeletePlayers');
         Route::get('/searchEvenements', [EvenementsController::class, 'search'])->name('evenements.search');
         Route::delete('/evenements/{id}', [EvenementsController::class, 'destroy'])->name('evenements.destroy');
         Route::get('/evenements/{evenement}/edit', [EvenementsController::class, 'edit'])->name('evenements.edit');

@@ -57,13 +57,22 @@
         </div>
         @endif
         <div class="info">
+            @if ($userEvenement->players_number == 0)
+              
+            <p class="nbr bg bg-danger p-2">évènement victime de son succès</p>
+            @else
             <p class="nbr">{{$userEvenement->players_number}}-place</p>
+            @endif            
             <h3 id="category">{{$userEvenement->category->name}}</h3>
             <p>
                 {{$userEvenement->lieu}} - {{$userEvenement->adresse}}
             </p>
             <p>durée - {{$userEvenement->duree}} h</p>
         </div>
+        <div class="fav">
+            <input  type="checkbox" name="favorie" class="btn-check" id="favorie" >
+            <label class="btn btn-outline-danger" for="favorie"><i class="bi bi-suit-heart-fill">3</i></label>
+          </div>
         <div class="show">
             
             <a href="{{route('userEvenements.show', ['userEvenement'=>$userEvenement->id]) }}"><i class="bi bi-zoom-in"></i></a>

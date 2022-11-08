@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 
 * {
     padding: 0;
@@ -30,7 +30,7 @@ width: 100%;
 
 .titre {
      grid-area: 1 / 1 / 7 / 3; 
-     font: 700 0.75rem "Source Sans Pro";
+     font: 700 0.75rem "Roboto";
      display: flex;
      justify-content: center;
      align-items: center;
@@ -40,6 +40,8 @@ width: 100%;
 
 }
 .titre h1 {
+    font-style: italic;
+
     font-size: 50px;
     text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
     -webkit-animation:tracking-in-expand 3s cubic-bezier(.215,.61,.355,1.000) both;animation:tracking-in-expand 3s cubic-bezier(.215,.61,.355,1.000) both
