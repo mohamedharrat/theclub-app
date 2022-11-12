@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Categories;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -50,6 +51,16 @@ class Evenements extends Model
     public function players()
     {
         return $this->belongsToMany(User::class, 'evenements_user');
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'evenement_user_like');
+    }
+
+    public function isLiked()
+    {
+        return Auth::user()->likes->contains('id', $this->id);
     }
 
 

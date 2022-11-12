@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('userEvenements', UserEvenementsController::class);
     Route::delete('userEvenements/{userEvenement}', [UserEvenementsController::class, 'destroy'])->name('userEvenements.destroy');
     Route::get('/userEvenements/{id}/participe', [UserEvenementsController::class, 'participe'])->name('userEvenements.participe');
+    Route::get('userEvenements/{id}/like', [UserEvenementsController::class, 'like'])->name('userEvenements.like');
     Route::delete('/userEvenements/{id}/annuler', [UserEvenementsController::class, 'annuler'])->name('userEvenements.annuler');
     Route::delete('userEvenements/{id}/deletePlayers', [UserEvenementsController::class, 'deletePlayers'])->name('userEvenements.deletePlayers');
     Route::get('userEvenements/{userEvenement}/edit', [UserEvenementsController::class, 'edit'])->name('userEvenements.edit');
@@ -83,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('userEvenements/{userEvenement}/show', [UserEvenementsController::class, 'show'])->name('userEvenements.show');
 
 Route::get('mesEvenements', [UserEvenementsController::class, 'mesEvenements'])->name('mesEvenements')->middleware(['auth', 'verified']);
+Route::get('favoris', [UserEvenementsController::class, 'favoris'])->name('favoris')->middleware(['auth', 'verified']);
 Route::get('/profil', function () {
     return view('usersView.profil');
 })->middleware(['auth', 'verified']);

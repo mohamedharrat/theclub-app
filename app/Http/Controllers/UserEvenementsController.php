@@ -50,7 +50,7 @@ class UserEvenementsController extends Controller
 
         // dd($userEvenements);
         else {
-            $userEvenements = Evenements::all()->where('date', date('Y-m-d'));
+            $userEvenements = Evenements::select()->where('date', date('Y-m-d'))->orderby('heure', 'asc')->get();
         }
 
 
@@ -229,7 +229,7 @@ class UserEvenementsController extends Controller
 
         $evenements->save();
 
-        return back()->with("Participe", "vous participez a cet evenement !")->withInput();
+        return back()->with("participe", "vous participez a cet evenement !")->withInput();
     }
 
     public function annuler($id)
@@ -266,6 +266,8 @@ class UserEvenementsController extends Controller
     public function mesEvenements()
     {
         $userEvenements = Evenements::select()->where('author_id', Auth::user()->id)->orderby('date', 'asc')->get();
+
+
         return view('usersView.mesEvenements', [
             'userEvenements' => $userEvenements,
         ]);
@@ -302,5 +304,21 @@ class UserEvenementsController extends Controller
         } else {
             return back()->with("errorRegister", "registration failed")->withInput();
         }
+    }
+
+    public function like($id)
+    {
+        $user = Auth::user();
+        $evenement = Evenements::find($id);
+        // dd($evenement);
+        $user->Likes()->toggle($evenement);
+
+        return back();
+    }
+
+    public function favoris()
+    {
+
+        return view('usersView.favoris');
     }
 }

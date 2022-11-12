@@ -86,7 +86,7 @@
         <div class="info">
           @if ($userEvenement->players_number == 0)
               
-          <p class="nbr bg bg-danger p-2">évènement victime de son succès</p>
+          <p class="nbr bg bg-danger p-2">complet</p>
           @else
           <p class="nbr">{{$userEvenement->players_number}}-place</p>
           @endif
@@ -97,8 +97,14 @@
           <p>durée - {{$userEvenement->duree}} h</p>
         </div>
         <div class="fav">
-          <input  type="checkbox" name="favorie" class="btn-check" id="favorie" >
-          <label class="btn btn-outline-danger" for="favorie"><i class="bi bi-suit-heart-fill">3</i></label>
+          <a href="{{route('userEvenements.like',['id' => $userEvenement->id])}}" class="btn btn-danger"> 
+            @if ($userEvenement->isLiked())
+            <i class="bi bi-suit-heart-fill"></i>
+            @else
+            <i class="bi bi-suit-heart"></i>
+            @endif
+            {{$userEvenement->likes()->count()}}
+          </a>
         </div>
         <div class="show">
 

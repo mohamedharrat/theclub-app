@@ -13,7 +13,7 @@
       <x-navbar-layouts/>
       @if (session('participe'))
 <div class="alert alert-success">
-    {{session('participer')}}
+    {{session('participe')}}
 </div>  
 @endif
 @if (session('annuler'))
@@ -75,13 +75,13 @@
                             <input type="text" name="player" value="{{$player->id}}" hidden>
                             <input type="text" name="evenement" value="{{$userEvenements->id}}" hidden>
                             @if ($userEvenements->author_id == Auth::user()->id)
-                            <button  class="bg bg-danger" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$player->id}}').submit()}" style="text-decoration: none">
+                            <button  class="bg bg-danger" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_player-{{$player->id}}').submit()}" style="text-decoration: none">
                                 <i class="bi bi-trash px-1"></i>
                             </button>
+                            @endif
                             @csrf
                            @method('delete')
                         </form>
-                        @endif
                     </li>
                     @endforeach
                 </ul>
@@ -99,6 +99,7 @@
             {{-- @if ($player->id == Auth::user()->id) --}}
             <a id="participe" class="bg bg-success" href="{{route('userEvenements.participe', ['id' => $userEvenements->id])}}">PARTICIPER</a>
             {{-- @else --}}
+            @endif
             <a id="annuler" class="bg bg-danger " href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
                 ANNULER
             </a>  
@@ -107,7 +108,6 @@
                 @method('delete')
             </form>            {{-- @endif --}}
         </div>
-        @endif
     </div>
 </section>
 </div>

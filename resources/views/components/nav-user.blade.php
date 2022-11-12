@@ -16,7 +16,7 @@
     <a href="{{route('userEvenements.create')}}" class="plus">
       <i class="bi bi-plus-circle-fill"></i>
     </a>
-    <a href="">
+    <a href="{{route('favoris')}}">
       <i class="bi bi-calendar-heart-fill"></i>
       <p>Favoris</p>
     </a>
