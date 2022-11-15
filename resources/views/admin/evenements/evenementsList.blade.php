@@ -54,7 +54,9 @@
   {{-- {{$evenements->links()}} --}}
 
   @foreach ($evenements as $evenement)
-      <div class="evenement">
+  
+  <div class="evenement">
+        <h6 class=" text-center text-light p-1">{{$evenement->date}}</h6>
     @if ($evenement->category->name == "tennis")
     <div class="heure" id="heure" style="background: url('/photo-event/tennis.jpg')center/cover">
       <h2>{{$evenement->heure}}</h2> 

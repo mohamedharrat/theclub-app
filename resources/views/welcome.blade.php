@@ -20,53 +20,32 @@
     <link rel="stylesheet" href="{{asset('css/navbar-accueil.css')}}" />
   </head>
   <body>
-    <div class="cont">
+    <div class="info">
+    
+    
+      <div class="resultat">
+        <p>foot : <span id="resultatFoot"></span></p>
+        <p>tennis : <span id="resultatTennis"></span></p>
+        <p>basket : <span id="resultatBasket"></span></p>
+      </div>
+    </div>
+  </div>
+ <div class="centre">
+
+   <div class="cont">
+    <div class="left">
+
       <div class="titre">
         <h1>THE CLUB</h1>
         <p>Faire du sport est devenu facile ...</p>
       </div>
       <div class="register">
         <h2 class="insc">REJOINS-NOUS !</h2>
-        <i class="bi bi-caret-down-fill"></i>
         <x-navbar/>
       </div>
-      <div class="photo">
-        <div
-          id="carouselExampleSlidesOnly"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="{{asset('photo-accueil/tennis.jpg')}}"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="{{asset('photo-accueil/foot.jpg')}}"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="{{asset('photo-accueil/basket.jpg')}}"
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <footer>
-        <h4>NOUS CONTACTER</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
-          fuga.
-        </p>
+        
         <div class="logo">
           <ul>
             <li>
@@ -85,7 +64,12 @@
         </div>
       </footer>
     </div>
-
+  </div>
+ 
+  
+    
+    <script src="{{asset('js/accueil.js')}}"></script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"

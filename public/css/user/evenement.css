@@ -1,12 +1,46 @@
+.header {
+    background: #000000b4;
+    height: 200px;
+}
+
+.header::before {
+    clip-path: polygon(70% 0, 100% 0%, 100% 100%, 30% 99%);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    content: " ";
+    height: 100%;
+    width: 100%;
+    background: url(/photo-list/tennis-court-ge26f16812_1920.jpg)center/cover;
+}
+
+
+
 
 #date {
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 5px;
+    background: #434343;
+    color: white;
     outline: none;
     border: none;
 }
 
+#btn-filtre {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #434343;
+    color: white;
+    outline: none;
+    border: none;
+}
 
+#btn-filtre:hover {
+    color: #434343;
+    background: white;   
+}
 
 .list {
     margin: 10px;
@@ -15,6 +49,7 @@
 
 
 .evenement {
+    background: rgba(51, 51, 51, 0.447);
     margin-left: 20px;
     margin-bottom: 20px;
     height: 120px;

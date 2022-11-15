@@ -265,7 +265,7 @@ class UserEvenementsController extends Controller
 
     public function mesEvenements()
     {
-        $userEvenements = Evenements::select()->where('author_id', Auth::user()->id)->orderby('date', 'asc')->get();
+        $userEvenements = Evenements::select()->where('author_id', Auth::user()->id)->where('date', '=>', date('Y-m-d'))->orderby('date', 'asc')->get();
 
 
         return view('usersView.mesEvenements', [

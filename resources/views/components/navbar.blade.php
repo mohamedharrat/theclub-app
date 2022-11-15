@@ -32,10 +32,10 @@
 </nav>
     
     @else
-        <a href="{{ route('login') }}" class="btn-login" id="button">Log in</a>
+        <a href="{{ route('login') }}" class="btn-login" id="button">Connection</a>
 
         @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="btn-register" id="button">Register</a>
+            <a href="{{ route('register') }}" class="btn-register" id="button">Inscription</a>
         @endif
     @endauth
 </div>

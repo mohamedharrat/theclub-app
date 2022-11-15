@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card bg bg-dark text-light">
                 <div class="card-header">INSCRIPTION</div>
 
                 <div class="card-body">
@@ -43,33 +43,21 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <div class="form-check form-check-inline col-md-6">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="admin" />
+                                    <label class="form-check-label" for="inlineRadio1">admin</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline col-md-6">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="user" />
+                                    <label class="form-check-label" for="inlineRadio2">user</label>
+                                </div>
                             </div>
                         </div>
 
-                        {{-- <div class="row mb-3">
-                            <label for="contact" class="col-md-4 col-form-label text-md-end">{{ __('Votre Contact') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="contact" type="tel" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact" placeholder="(+221)7XXXXXXX">
-
-                                @error('contact')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
-                        <div class="row mb-3">
-                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Votre Role') }}</label>
 
                             
-                                <select name="role" id="role" class="form-select w-50">
-                                    <option value="admin" class="form-control">Admin</option>
-                                    <option value="user" class="form-control">User</option>
-                                </select>
                             
-                        </div>                        
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

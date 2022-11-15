@@ -42,28 +42,33 @@
     {{session('status')}}
 </div>
 @endif 
-<form action="" method="get" id="date_filtre">
-  @csrf
-</form>
-<br>
-<form action="" method="get" id="sport_filtre">
-  <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
-  <button type="submit" class="btn btn-light">filtre</button>
+<div class="header">
 
-<br>
-<br>
-<input type="radio" name="category" class="btn-check" id="foot" value="1" <?php echo $category == 1 ? "checked" : "" ?>>
-<label class="btn btn-outline-success" for="foot">Football</label>
+  <form action="" method="get" id="date_filtre">
+    @csrf
+  </form>
+  <br>
+  <form action="" method="get" id="sport_filtre">
+    <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
+    <button type="submit" class="" id="btn-filtre">filtre</button>
+    
+    <br>
+    <br>
+    <input type="radio" name="category" class="btn-check" id="foot" value="1" <?php echo $category == 1 ? "checked" : "" ?>>
+    <label class="btn btn-outline-success" for="foot">Football</label>
+    
+    <input type="radio" name="category" class="btn-check" id="tennis" value="2" <?php echo $category == 2 ? "checked" : "" ?>>
+    <label class="btn btn-outline-warning" for="tennis">Tennis</label>
+    
+    <input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
+    <label class="btn btn-outline-danger" for="basket">Basket</label>
+    <br>
+  </form>
 
-<input type="radio" name="category" class="btn-check" id="tennis" value="2" <?php echo $category == 2 ? "checked" : "" ?>>
-<label class="btn btn-outline-warning" for="tennis">Tennis</label>
-
-<input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
-<label class="btn btn-outline-danger" for="basket">Basket</label>
-<br>
-</form>
-{{-- <a href=""></a> --}}
-<a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
+  
+  {{-- <a href=""></a> --}}
+  <a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
+</div>
 <div class="list">
   {{-- {{$evenements->links()}} --}}
 

@@ -48,16 +48,20 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <div class="form-check form-check-inline col-md-6">
+                                    <input class="form-check-input" type="radio" name="admin" id="inlineRadio1" value="admin" />
+                                    <label class="form-check-label" for="inlineRadio1">admin</label>
+                                </div>
+                                
+                                <div class="form-check form-check-inline col-md-6">
+                                    <input class="form-check-input" type="radio" name="user" id="inlineRadio2" value="user" />
+                                    <label class="form-check-label" for="inlineRadio2">user</label>
+                                </div>
                             </div>
                         </div>
 
 
-                        {{-- <div class="row ml-5">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" name="admin"  role="switch" id="admin">
-                              <label class="form-check-label" for="admin">Admin</label>
-                            </div>
-                          </div> --}}
+                      
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

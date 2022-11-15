@@ -21,7 +21,7 @@
   <x-navbar-layouts/>
  </div>
 
-<div class="yield-user" style="padding: 20px">
+<div class="yield-user" >
   @yield('content')
 </div>
 <br>

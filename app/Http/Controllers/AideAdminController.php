@@ -34,7 +34,15 @@ class AideAdminController extends Controller
     public function create(Request $request)
     {
         //
-        return view('usersView.aideAdminForm');
+        $aideAdmins = AideAdmin::all()->where('author_id', Auth::user()->id);
+        return view(
+
+
+            'usersView.aideAdminForm',
+            [
+                'aideAdmins' => $aideAdmins,
+            ]
+        );
     }
 
     /**
@@ -81,6 +89,11 @@ class AideAdminController extends Controller
     {
         //
         $aideAdmins = AideAdmin::find($id);
+        // $aideAdmins = AideAdmin::find($id);
+        $aideAdmins['status'] = 'lu';
+        $aideAdmins->save();
+
+        // $aideAdmins['status'] == 'lu';
         return view('admin.aideAdmin.aideAdminShow', [
             'aideAdmins' => $aideAdmins
         ]);
@@ -107,6 +120,7 @@ class AideAdminController extends Controller
     public function update(Request $request, $id)
     {
         //
+
     }
 
     /**

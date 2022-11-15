@@ -10,65 +10,67 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
-      <x-navbar-layouts/>
-      @if (session('participe'))
-<div class="alert alert-success">
-    {{session('participe')}}
-</div>  
-@endif
-@if (session('annuler'))
-<div class="alert alert-danger">
-    {{session('annuler')}}
-</div>  
-@endif
-@if (session('deletePlayer'))
-<div class="alert alert-danger">
-    {{session('deletePlayer')}}
-</div>  
-@endif
-<div class="info-ev">
-    <header></header>
-    <section>
-        @if ($userEvenements->category->name == "tennis")
-        <div class="cat" id="heure" style="background: orange">
+    <div class="content">
+
+        <x-navbar-layouts/>
+        @if (session('participe'))
+        <div class="alert alert-success">
+            {{session('participe')}}
+        </div>  
+        @endif
+        @if (session('annuler'))
+        <div class="alert alert-danger">
+            {{session('annuler')}}
+        </div>  
+        @endif
+        @if (session('deletePlayer'))
+        <div class="alert alert-danger">
+            {{session('deletePlayer')}}
+        </div>  
+        @endif
+        <div class="info-ev">
+            <header></header>
+            <section>
+                @if ($userEvenements->category->name == "tennis")
+                <div class="cat" id="heure" style="background: orange">
+                    <h2>{{$userEvenements->category->name}}</h2> 
+                </div>
+                @elseif($userEvenements->category->name == 'basket')
+                <div class="cat" id="heure" style="background: rgb(4, 4, 118)">
             <h2>{{$userEvenements->category->name}}</h2> 
         </div>
-        @elseif($userEvenements->category->name == 'basket')
-        <div class="cat" id="heure" style="background: rgb(4, 4, 118)">
+        @else
+        <div class="cat" id="heure" style="background: rgb(14, 129, 51)">
             <h2>{{$userEvenements->category->name}}</h2> 
         </div>
-    @else
-    <div class="cat" id="heure" style="background: rgb(14, 129, 51)">
-        <h2>{{$userEvenements->category->name}}</h2> 
-    </div>
-    @endif
-    <div class="sec-2">
-        <h3>{{$userEvenements->lieu}}</h3>
-        <h4>{{$userEvenements->date}}</h4>
-        <div class="info">
-            <div class="p">
-                <i class="bi bi-clock"></i>
-                <p>{{$userEvenements->heure}}</p>
+        @endif
+        <div class="sec-2">
+            <h3>{{$userEvenements->lieu}}</h3>
+            <h4>{{$userEvenements->date}}</h4>
+            <div class="info">
+                <div class="p">
+                    <i class="bi bi-clock"></i>
+                    <p>{{$userEvenements->heure}}</p>
+                </div>
+                <div class="p">
+                    <i class="bi bi-hourglass"></i>
+                    <p>{{$userEvenements->duree}}</p>
+                </div>
+                <div class="p">
+                    <i class="bi bi-people-fill"></i>
+                    <p>{{$userEvenements->players_number}}</p>
+                </div>
             </div>
-            <div class="p">
-                <i class="bi bi-hourglass"></i>
-                <p>{{$userEvenements->duree}}</p>
+            <div class="reste">
+                <p>Event : {{$userEvenements->title}}</p>
+                <p>description : {{$userEvenements->description}}</p>
+                <p>Adresse : {{$userEvenements->adresse}}</p>
             </div>
-            <div class="p">
-                <i class="bi bi-people-fill"></i>
-                <p>{{$userEvenements->players_number}}</p>
-            </div>
-        </div>
-        <div class="reste">
-            <p>Event : {{$userEvenements->title}}</p>
-            <p>description : {{$userEvenements->description}}</p>
-            <p>Adresse : {{$userEvenements->adresse}}</p>
-        </div>
-        <h5>Event crée par <br> {{$userEvenements->author->name}}</h5>
-        <div class="list">
-            <h6>Liste des participant</h6>
-            <ul id="players">
-                @foreach ($userEvenements->players as $player)
+            <h5>Event crée par <br> {{$userEvenements->author->name}}</h5>
+            <div class="list">
+                <h6>Liste des participant</h6>
+                <ul id="players">
+                    @foreach ($userEvenements->players as $player)
                     <li>
                         {{$player->name}}
                         <form id="delete_player-{{$player->id}}" action="{{route('userEvenements.deletePlayers',['id'=>$userEvenements->id])}}" method="post">
@@ -80,19 +82,19 @@
                             </button>
                             @endif
                             @csrf
-                           @method('delete')
+                            @method('delete')
                         </form>
                     </li>
                     @endforeach
                 </ul>
-        </div>
-
+            </div>
+            
         @if ($userEvenements->players_number == 0)
             
         <h3 class="bg bg-danger text-center">évènement complet</h3>
-
+        
         @else
-
+        
         <div class="submit">
             
             <p id="user" hidden>{{Auth::user()->name}}</p>
@@ -100,19 +102,23 @@
             <a id="participe" class="bg bg-success" href="{{route('userEvenements.participe', ['id' => $userEvenements->id])}}">PARTICIPER</a>
             {{-- @else --}}
             @endif
-            <a id="annuler" class="bg bg-danger " href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
+           
+                
+            <a id="annuler" class="bg bg-danger "  href="#" onclick="if(confirm('Êtes-vous sûr de vouloir annuler la participation?')){document.getElementById('delete_players-{{$userEvenements->id}}').submit()}" style="text-decoration: none">
                 ANNULER
             </a>  
             <form id="delete_players-{{$userEvenements->id}}" action="{{route('userEvenements.annuler',['id'=>$userEvenements->id])}}" method="post">
                 @csrf
                 @method('delete')
             </form>            {{-- @endif --}}
+            
         </div>
     </div>
 </section>
 </div>
 <script src="{{asset('js/show.js')}}"></script>
 
+</div>
 </body>
 </html>
   

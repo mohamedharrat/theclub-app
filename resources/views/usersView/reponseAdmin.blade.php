@@ -2,16 +2,17 @@
 
 @section('content')
 <div class="rep">
-    @if ($reponses->count() == 0)
-    <p>Il n'y a pas de réponse</p>
-    @else
-    @foreach ($reponses as $reponse)
+    
+    @foreach ($aideAdmins as $aideAdmin)
     <div class="card-body bg bg-dark text-light">
-        <h5 class="card-title">Réponse a </h5>
-        <h6>--{{$reponse->title}}--</h6>
+        <h5 class="card-title">{{$aideAdmin->title}}</h5>
+        <p class="card-text">"{{$aideAdmin->content}}"</p>
+        @foreach ($reponses as $reponse)
+        <p class="card-text">"{{$reponse->title}}"</p>
         <p class="card-text">"{{$reponse->content}}"</p>
+        @endforeach
     </div>
     @endforeach
-    @endif
+    
 </div>
 @endsection

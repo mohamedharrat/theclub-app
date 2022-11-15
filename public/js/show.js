@@ -7,6 +7,11 @@ for (i = 0; i < players.children.length; i++) {
     if (players.children[i].innerText == user_name.innerText) {
         participe.style.display = "none";
     }
+    if (players.children[i].innerText !== user_name.innerText) {
+        annuler.style.display = "none";
+    } else if (players.children[i].innerText == user_name.innerText) {
+        annuler.style.display = "block";
+    }
 }
 
 if (players.children.length == 0) {

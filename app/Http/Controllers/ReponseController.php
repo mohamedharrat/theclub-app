@@ -18,23 +18,24 @@ class ReponseController extends Controller
     {
         //
         $user_id = Auth::user()->id;
-        $aideAdmins = AideAdmin::select()->where('author_id', $user_id)->get();
+        $aideAdmins = AideAdmin::all()->where('author_id', $user_id);
+        // dd($aideAdmins->reponses());
+
         if ($aideAdmins->count() != 0) {
 
             foreach ($aideAdmins as $aideAdmin) {
                 // dd($aideAdmin->id);
-                $reponses = Reponse::select()->where('aideAdmin_id', $aideAdmin->id)->orderby('created_at', 'asc')->get();
+                $reponses = Reponse::all()->where('aideAdmin_id', $aideAdmin->id);
             }
         }
-        // else {
-        //     $reponses = Reponse::all();
-        // }
         // dd($reponses);
+
+
         return view(
             'usersView.reponseAdmin',
             [
                 'reponses' => $reponses,
-                // 'aideAdmin' => $aideAdmin,
+                'aideAdmins' => $aideAdmins,
             ]
         );
     }
@@ -72,12 +73,18 @@ class ReponseController extends Controller
         $reponse['aideAdmin_id'] = $request->aideAdmin_id;
 
 
-
+        $aideAdmins = AideAdmin::all()->where('id', $request->aideAdmin_id);
 
         $newReponse = Reponse::create($reponse);
-        // dd($newAideAdmin);
 
+        // dd($newAideAdmin);
         if ($newReponse) {
+            foreach ($aideAdmins as $aideAdmin) {
+                // dd($aideAdmin);
+
+                $aideAdmin['verified'] = 'V';
+                $aideAdmin->save();
+            }
             return redirect(route('aideAdmin.index'));
         }
     }

@@ -22,7 +22,7 @@ class EvenementsController extends Controller
     public function index()
     {
         //
-        $evenements =  Evenements::orderby('heure', 'asc')->get();
+        $evenements =  Evenements::orderby('date', 'asc')->orderby('heure', 'asc')->get();
 
         return view('admin.evenements.evenementsList', [
             'evenements' => $evenements,
@@ -155,10 +155,9 @@ class EvenementsController extends Controller
         $evenements->update($evenementEdited);
 
 
-        if ($evenements) {
 
-            return view('admin.evenements.evenementsList', ['evenement' => $evenements])->with('update', "L'évenement n° $evenements->id a été mis à jour avec succès!");
-        }
+
+        return redirect('admin/evenements.index')->with('update', "L'évenement n° $evenements->id a été mis à jour avec succès!");
     }
 
     /**
@@ -217,5 +216,19 @@ class EvenementsController extends Controller
         $evenement->save();
 
         return back()->with("annuler", "participant supprimé !");
+    }
+
+    public function dashboard()
+    {
+        $users = User::all();
+        $evenements = Evenements::all();
+
+        return view(
+            'admin.dashboard',
+            [
+                'users' => $users,
+                'evenements' => $evenements,
+            ]
+        );
     }
 }

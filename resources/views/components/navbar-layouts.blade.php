@@ -26,7 +26,7 @@
                     <div class="nav-1">
 
                         @if (Auth::user()->role =='admin')
-                        <a href="/dashboard" class="a-nav">dashboard</a>
+                        <a href="{{route('dashboard')}}" class="a-nav">dashboard</a>
                         
                         @else
                         

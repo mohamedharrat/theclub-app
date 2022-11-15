@@ -61,9 +61,7 @@ class UserController extends Controller
         $register['name'] = $request->name;
         $register['email'] = $request->email;
         $register['password'] = Hash::make($pass);
-        if ($request['admin']) {
-            $user['role'] = 'admin';
-        }
+        $register['role'] = $request->role;
 
         // dd($register);
         $newUser = User::create($register);
@@ -122,9 +120,13 @@ class UserController extends Controller
         $register = $validate;
         $register['name'] = $request->name;
         $register['email'] = $request->email;
-        // if ($request['admin']) {
-        //     $register['role'] = 'admin';
-        // }
+        // $register['role'] = $request->role;
+
+        if ($request->admin) {
+            $register['role'] = 'admin';
+        } elseif ($request->user) {
+            $register['role'] = 'user';
+        }
         $user->update($register);
         // dd($user);
         // dd($user);

@@ -8,22 +8,25 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: #333 !important;
+
 }
 
 
 
 .yield-user {
     min-height: 100vh;
+    /* background: url(/photo-list/fondList.jpg)center/cover; */
+
 }
 
 
+
+
 .addEvents {
-    background: white;
-    border-radius: 20px;
-    color: #434343;
+    background: #434343;
+    border-radius: 5px;
+    color:white ;
     text-decoration: none;
     padding: 10px;
    position: absolute;
@@ -32,8 +35,8 @@ body {
 }
 
 .addEvents:hover {
-    color: white;
-    background: #434343a0;
+    color: #434343;
+    background: white;
 }
 
 
@@ -85,4 +88,76 @@ font-size: 1rem;
     color: #4286f4;
     /* transform: scale(1.3); */
 }
+
+.cont-aide {
+    padding: 20px;
+    width: 40%;
+}
+
+.cont-aide .titre {
+    margin-bottom: 10px;
+}
+
+.cont-aide::before {
+    
+        /* clip-path: polygon(70% 0, 100% 0%, 100% 100%, 30% 99%); */
+    
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        content: " ";
+        height: 100%;
+        width: 50%;
+        background: url(/photo-aide/pexels-ingo-joseph-2618794.jpg)center/cover;
+    }
+
+    .m-page::before{
+        position: absolute;
+        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        left: 50%;
+        z-index: -1;
+        content: " ";
+        height: 100%;
+        width: 50%;
+        background: url(/mes-event/pexels-pixmike-413195.jpg)center/cover;
+    }
+    .m-page::after{
+        position: absolute;
+        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        right: 50%;
+        z-index: -1;
+        content: " ";
+        height: 100%;
+        width: 50%;
+        background: url(/mes-event/pexels-pixmike-413195.jpg)center/cover;
+    }
+
+    .favoris::before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        background: url(/photo-favoris/heart-gd0531ff63_1280.jpg)center/cover;
+    }
+
+    .favoris .titre {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 50px;
+        height: 100%;
+        width: 50%;
+        z-index: -1;
+        /* color: #FFFFFF;
+        background: #333333; */
+        text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, yellow 0px 0px 20px, yellow 0px 0px 30px, yellow 0px 0px 40px, yellow 0px 0px 50px, yellow 0px 0px 75px;
+        color: #FFFFFF;
+        /* background: #333333; */
+    }
+
+
+
 

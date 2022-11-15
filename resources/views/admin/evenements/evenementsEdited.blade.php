@@ -24,6 +24,11 @@
                         <label for="title">Titre</label>
                         <input class="bg bg-dark text-light" type="text" name="title" id="title" value="{{$evenement->title}}">
                     </div>
+
+                    <div class="card mb-3 bg bg-dark text-light">
+                        <label for="player">nombre de joueur</label>
+                        <input type="number" name="player" id="player" class="bg bg-dark text-light">
+                    </div>
                     
                     <div class="card mb-3 bg bg-dark text-light">
                         <label for="texte">description</label>

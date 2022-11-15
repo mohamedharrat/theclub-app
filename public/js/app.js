@@ -12,19 +12,19 @@ const foot = document.getElementById("foot");
 
 // filtre mes evenements //
 
-const mesEvenementsBtn = document.getElementById("myEvents");
-const participeBtn = document.getElementById("Eparticipe");
-const myEvent = document.getElementById("mes-evenements");
-const eParticipe = document.getElementById("e-participe");
+// const mesEvenementsBtn = document.getElementById("myEvents");
+// const participeBtn = document.getElementById("Eparticipe");
+// const myEvent = document.getElementById("mes-evenements");
+// const eParticipe = document.getElementById("e-participe");
 
-mesEvenementsBtn.addEventListener("click", function mesEvenement() {
-    // myEvent.style.display = "block";
-    // eParticipe.style.display = "none";
-    console.log("ok");
-});
+// mesEvenementsBtn.addEventListener("click", function mesEvenement() {
+//     // myEvent.style.display = "block";
+//     // eParticipe.style.display = "none";
+//     console.log("ok");
+// });
 
-participeBtn.addEventListener("click", function participe() {
-    // myEvent.style.display = "none";
-    // eParticipe.style.display = "block";
-    console.log("333");
-});
+// participeBtn.addEventListener("click", function participe() {
+//     // myEvent.style.display = "none";
+//     // eParticipe.style.display = "block";
+//     console.log("333");
+// });

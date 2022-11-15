@@ -21,4 +21,9 @@ class AideAdmin extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reponses()
+    {
+        return $this->hasMany(Reponse::class);
+    }
 }

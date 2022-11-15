@@ -1,13 +1,38 @@
-.btn-login, .btn-register {
-color: black;
-border: 2px solid black;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+
+.btn-login {
+    text-align: center;
+    margin: 10px;
+padding: 10px 30px;
 text-decoration: none;
-padding: 10px 20px;
-border-radius: 20px;
+font-family: "Roboto", sans-serif;
+color:#333 ;
+background: #4286f4;
+clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
 transition: .3s ease-in-out;
 }
 
-.btn-login:hover, .btn-register:hover {
-    color: white;
-    background-color: #333;
+.btn-register{
+    text-align: center;
+    margin: 20px 10px;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+    color:#333 ;
+    background: #4286f4;
+    transition: .3s ease-in-out;
+
+    }
+
+.btn-login:hover {
+    color: #333;
+    transform:scale(1.1);
+}
+.btn-register:hover  {
+    color: #333;
+    transform:scale(1.1);
+
 }

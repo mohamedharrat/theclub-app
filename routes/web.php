@@ -55,9 +55,9 @@ Route::middleware(['admin'])->group(function () {
         Route::resource('users', UserController::class)->except(['edit', 'update']);
         Route::get('/search', [UserController::class, 'search'])->name('users.search');
 
-        Route::get('/users/{user}', [UserController::class, 'edit'])->name('users.edit')->middleware(['admin', 'verified']);;
-        Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware(['admin', 'verified']);;
-
+        Route::get('/users/{user}', [UserController::class, 'edit'])->name('users.edit')->middleware(['admin', 'verified']);
+        Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware(['admin', 'verified']);
+        //evenement route
         Route::resource('evenements', EvenementsController::class)->except(['delete']);
         Route::get('/evenements/{id}/ajoutPlayer', [EvenementsController::class, 'ajoutPlayer'])->name('evenements.ajoutPlayer');
         Route::delete('userEvenements/{id}/adminDeletePlayers', [EvenementsController::class, 'adminDeletePlayers'])->name('evenements.adminDeletePlayers');
@@ -68,9 +68,10 @@ Route::middleware(['admin'])->group(function () {
     });
 });
 
+Route::get('/evenements/dashboard', [EvenementsController::class, 'dashboard'])->name('dashboard')->middleware(['admin', 'verified']);
 
 
-
+//user evenement route
 Route::middleware(['auth'])->group(function () {
     Route::resource('userEvenements', UserEvenementsController::class);
     Route::delete('userEvenements/{userEvenement}', [UserEvenementsController::class, 'destroy'])->name('userEvenements.destroy');

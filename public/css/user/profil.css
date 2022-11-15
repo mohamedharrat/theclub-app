@@ -1,32 +1,22 @@
-.profil-cont {
-    overflow: hidden;
+
+
+.profil-info {
+    /* clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); */
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.51);
+    text-align: center;
+    color: white;
+    background: url(/photo-user_page/pexels-ivan-samkov-4162550.jpg)center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.profil-info {
-    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-
-    position: absolute;
-    top: 50px;
-    left: 100px;
-    padding: 50px 0;
-    height: 400px;
-    width: 400px;
-    background: rgba(0, 0, 0, 0.51);
-    text-align: center;
-    color: white;
+.info-p {
     border: 10px white double;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.489);
 }
-.profil-cont::after {
-    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-    position: absolute;
-    top: 0;
-    right: 0;
-    content: " ";
-    background: url(/photo-user_page/pexels-ivan-samkov-4162550.jpg)center/cover;
-    width: 600px;
-    height: 100%;
-    z-index: -1;
-}
+
+

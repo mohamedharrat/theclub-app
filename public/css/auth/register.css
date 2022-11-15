@@ -10,9 +10,7 @@
 
 body {
     display: flex;
-    background: #373B44;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #333;
 }
 
 .registre {
@@ -44,7 +42,7 @@ form label {
 form input {
     background-color: transparent;
     outline: none;
-    color: white;
+    color: #333;
     border: none;
     /* border-radius: 50px; */
     border-bottom:1px solid  white;

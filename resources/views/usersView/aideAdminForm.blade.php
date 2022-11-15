@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="cont-aide">
-  <h4 class="text-light m-4">Demande d'aide à un administrateur/ <a class="btn btn-success" href="{{route('reponse.index')}}">Réponses des administrateurs</a> </h4>
+  <div class="titre">
+
+    <h4 class="text-light m-4">Demande d'aide à un administrateur
+      @if ($aideAdmins->count() == 0)
+        @else
+      /<a class="btn btn-success" href="{{route('reponse.index')}}">Réponses des administrateurs</a> </h4>
+      @endif
+  </div>
   <div class="aide-amin">
     <form action="{{route('aideAdmin.store')}}" method="post">
       @csrf
