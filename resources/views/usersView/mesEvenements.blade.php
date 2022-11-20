@@ -121,14 +121,18 @@
     @endforeach
     @endif
     
-    @if (Auth::user()->evenementsPlayer->count() == 0)
+    @if (Auth::user()->evenementsPlayer->count() == 0 )
     <div class="" id="e-participe" style="display: none">
         <h3 class="text-light">vous ne participé aucun évènement</h3>
     </div>
     @else
     
     @foreach (Auth::user()->evenementsPlayer as $userEvenement)
-    
+    @if ($userEvenement->date < date('Y-m-d'))
+    <div class="" id="e-participe" style="display: none">
+        <h3 class="text-light">vous ne participé aucun évènement</h3>
+    </div>
+    @else
     <div class="evenement" id="e-participe" style="display: none">
         <h6 class=" text-center text-light p-1">{{$userEvenement->date}}</h6>
         @if ($userEvenement->category->name == "tennis")
@@ -183,6 +187,7 @@
         </div>
     </div>
     
+    @endif
     @endforeach
     @endif
 </div>

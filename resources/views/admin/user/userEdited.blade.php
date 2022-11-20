@@ -48,17 +48,35 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <div class="form-check form-check-inline col-md-6">
-                                    <input class="form-check-input" type="radio" name="admin" id="inlineRadio1" value="admin" />
-                                    <label class="form-check-label" for="inlineRadio1">admin</label>
+                               <br>
+                               <br>
+                                <select name="role" id="role" class="form-select w-50">
+                                    <option value="admin" class="form-control">Admin</option>
+                                    <option value="user" class="form-control">User</option>
+                                </select>
+        
+                                <br>
+                                <br>
+                                <div class="">
+                                    <label for="region" class="">Région</label>
+                                    <select class="custom-select  bg bg-dark text-light " name="region" id="region">
+                                        @foreach ($regions as $region)
+                                        <option value="{{$region->name}}">{{$region->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                
-                                <div class="form-check form-check-inline col-md-6">
-                                    <input class="form-check-input" type="radio" name="user" id="inlineRadio2" value="user" />
-                                    <label class="form-check-label" for="inlineRadio2">user</label>
+                                <br>
+                                <div class="">
+                                    <label for="ville" class="">ville</label>
+                                    <input type="text" class="" name="ville">
                                 </div>
                             </div>
                         </div>
+
+                       
+                        
+                       
+                    </div>
 
 
                       

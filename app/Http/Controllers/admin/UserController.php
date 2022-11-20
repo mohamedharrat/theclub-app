@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\User;
+use App\Models\Region;
+use App\Models\Reponse;
+use App\Models\AideAdmin;
+use App\Models\Evenements;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\UserCreateNotification;
-use App\Models\AideAdmin;
-use App\Models\Evenements;
-use App\Models\Reponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -24,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::orderby('created_at', 'desc')->paginate(5);
 
         return view('admin.user.userList', ['users' => $users]);
     }
@@ -37,7 +38,14 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('admin.user.userForm');
+        $regions = Region::select('name', 'id')->orderby('id')->get();
+
+        return view(
+            'admin.user.userForm',
+            [
+                'regions' => $regions
+            ]
+        );
     }
 
     /**
@@ -60,13 +68,17 @@ class UserController extends Controller
         $register['pass'] = $pass;
         $register['name'] = $request->name;
         $register['email'] = $request->email;
+        $register['region'] = $request->region;
+        $register['city'] = $request->ville;
         $register['password'] = Hash::make($pass);
         $register['role'] = $request->role;
+        // dd($request->role);
 
         // dd($register);
         $newUser = User::create($register);
 
         if ($newUser) {
+            Mail::to($newUser->email)->send(new UserCreateNotification($register));
             return redirect('admin/users')->with('inscription', 'Votre compte a été bien crée');
         }
     }
@@ -92,8 +104,13 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $regions = Region::select('name', 'id')->orderby('id')->get();
         $user = User::find($id);
-        return  view('admin.user.userEdited', ['user' => $user]);
+        return  view('admin.user.userEdited', [
+            'user' => $user,
+            'regions' => $regions,
+
+        ]);
     }
 
     /**
@@ -111,7 +128,7 @@ class UserController extends Controller
         $validate = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            // 'role' => ['required', 'string'],
+            'role' => ['required', 'string'],
 
 
         ]);
@@ -120,13 +137,9 @@ class UserController extends Controller
         $register = $validate;
         $register['name'] = $request->name;
         $register['email'] = $request->email;
-        // $register['role'] = $request->role;
+        $register['role'] = $request->role;
 
-        if ($request->admin) {
-            $register['role'] = 'admin';
-        } elseif ($request->user) {
-            $register['role'] = 'user';
-        }
+
         $user->update($register);
         // dd($user);
         // dd($user);

@@ -23,11 +23,18 @@
                             @endforeach
                         </select>
                     </div>
-        
+
                     <div class="card mb-3 bg bg-dark">
                         <label for="title">Titre</label>
-                        <input class="bg bg-dark text-light" type="text" name="title" id="title">
+                        <input class="bg bg-dark text-light" type="text" name="title" id="title" @error('title')is-invalid @enderror">
+                        @error('title')
+                        <div class="alert alert-danger">
+                         {{$message}}
+                        </div>
+                     @enderror
                     </div>
+        
+                   
 
                     <div class="card mb-3 bg bg-dark">
                         <label for="player">nombre de joueur</label>
@@ -54,15 +61,11 @@
                     </div>
 
     
-            
                     <div class="card mb-3 bg bg-dark">
-                        <label for="municipality">ville</label>
-                        <select class="custom-select bg bg-dark text-light" name="ville" id="ville">
-                            @foreach ($villes as $ville)
-                            <option value="{{$ville->name}}">{{$ville->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="ville">Ville</label>
+                        <input class="bg bg-dark text-light" type="text" name="ville" id="ville">
                     </div>
+                    
 
                     {{-- <div class="card mb-3"> --}}
                         <label for="adresse">adresse <i class="bi bi-geo-alt-fill"></i></label>

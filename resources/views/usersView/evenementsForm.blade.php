@@ -13,7 +13,13 @@
         <div class="card bg bg-dark text-light">
             <div class="card-body">
                 <h5 class="card-header">Crée votre évenement </h5>
+                <br>
                 <div class="card mb-3 bg bg-dark">
+                    <div class="col-mb-4">
+                        <input type="checkbox" name="play" class="btn-check " id="foot" value="play">
+                        <label class="btn btn-outline-success" for="foot">je participe</label>
+                    </div>
+                    <br>
                     <label for="category">Catégories</label>
                     <select class="custom-select bg bg-dark text-light" name="categories" id="categories">
                         @foreach ($categories as $category)
@@ -59,12 +65,8 @@
 
         
                 <div class="card mb-3 bg bg-dark">
-                    <label for="municipality">ville</label>
-                    <select class="custom-select bg bg-dark text-light" name="ville" id="ville">
-                        @foreach ($villes as $ville)
-                        <option value="{{$ville->name}}">{{$ville->name}}</option>
-                        @endforeach
-                    </select>
+                    <label for="ville">Ville</label>
+                    <input class="bg bg-dark text-light" type="text" name="ville" id="ville">
                 </div>
 
                 <div class="card mb-3 bg bg-dark">

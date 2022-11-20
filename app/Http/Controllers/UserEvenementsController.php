@@ -24,18 +24,23 @@ class UserEvenementsController extends Controller
     {
         //
         // dd(date('Y/m/d'));
+        $region_filtre = Auth::user()->region;
+        // dd($region_filtre);
         $category = $request->category;
         $date = date('Y-m-d');
         // dd($foot, $tennis, $basket);
-        $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
+        $regions = Region::select('name', 'id')->orderby('id')->get();
+        $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', $date)->orderby('heure', 'asc')->get();
 
 
-        if ($request->date_filtre) {
+        if ($request->date_filtre && $request->region_filtre) {
             $date = $request->date_filtre;
+            // $regions = $request->region_filtre;
+
             if (isset($category)) {
-                $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->orderby('heure', 'asc')->get();
+                $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->where('region', $request->region_filtre)->orderby('heure', 'asc')->get();
             } else {
-                $userEvenements = Evenements::select()->where('date', $date)->orderby('heure', 'asc')->get();
+                $userEvenements = Evenements::select()->where('region', $request->region_filtre)->where('date', $date)->orderby('heure', 'asc')->get();
             }
             // if ($foot) {
             //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orderby('heure', 'asc')->get();
@@ -50,7 +55,7 @@ class UserEvenementsController extends Controller
 
         // dd($userEvenements);
         else {
-            $userEvenements = Evenements::select()->where('date', date('Y-m-d'))->orderby('heure', 'asc')->get();
+            $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', date('Y-m-d'))->orderby('heure', 'asc')->get();
         }
 
 
@@ -59,6 +64,8 @@ class UserEvenementsController extends Controller
             'userEvenements' => $userEvenements,
             'date' => $date,
             'category' => $category,
+            'regions' => $regions,
+            'region_filtre' => $region_filtre,
         ]);
     }
 
@@ -71,13 +78,11 @@ class UserEvenementsController extends Controller
     {
         //
         $categories = Categories::select('name', 'id')->get();
-        $regions = Region::select('name', 'id')->oldest('name')->get();
-        $villes = Ville::select('name', 'id')->oldest('name')->get();
+        $regions = Region::select('name', 'id')->orderby('id')->get();
 
         return view('usersView.evenementsForm', [
             'categories' => $categories,
             'regions' => $regions,
-            'villes' => $villes,
         ]);
     }
 
@@ -108,8 +113,16 @@ class UserEvenementsController extends Controller
         $evenement['author_id'] = Auth::user()->id;
         $evenement['adresse'] = $request->adresse;
         $evenement['players_number'] = $request->player;
+        if ($request->play) {
+            $evenement['players_number'] -= 1;
+        }
 
         $newEvenement = Evenements::create($evenement);
+
+        if ($request->play) {
+            $newEvenement->players()->attach(Auth::user()->id);
+            $newEvenement['players_number'] -= 1;
+        }
         if ($newEvenement) {
             return redirect('/userEvenements')->with('create', 'évènement crée avec succès !');
         }
@@ -140,14 +153,12 @@ class UserEvenementsController extends Controller
     {
         //
         $categories = categories::select('name', 'id')->get();
-        $regions = Region::select('name', 'id')->oldest('name')->get();
-        $villes = Ville::select('name', 'id')->oldest('name')->get();
+        $regions = Region::select('name', 'id')->orderby('id')->get();
 
         return view('usersView.evenementsEdited', [
             'userEvenement' => $userEvenement,
             'categories' => $categories,
             'regions' => $regions,
-            'villes' => $villes,
         ]);
     }
 
@@ -210,6 +221,7 @@ class UserEvenementsController extends Controller
         $evenement = Evenements::find($id);
         if ($evenement['author_id'] == Auth::user()->id) {
             $evenement->players()->detach();
+            $evenement->likes()->detach();
             $evenement->delete();
         }
 
@@ -265,7 +277,7 @@ class UserEvenementsController extends Controller
 
     public function mesEvenements()
     {
-        $userEvenements = Evenements::select()->where('author_id', Auth::user()->id)->where('date', '=>', date('Y-m-d'))->orderby('date', 'asc')->get();
+        $userEvenements = Evenements::all()->where('author_id', Auth::user()->id)->where('date', '=>', date('Y-m-d'));
 
 
         return view('usersView.mesEvenements', [

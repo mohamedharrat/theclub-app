@@ -4,7 +4,7 @@
 <a class="addUser" style="color:black" href="{{route('users.create')}}"><i class="bi bi-person-plus-fill"></i>  Add User</a>
  <br>
 @if (session('delete'))
-<div class="alert alert-success">
+<div class="alert alert-danger">
     {{session('delete')}}
 </div>  
 @endif
@@ -21,13 +21,13 @@
 @endif
 
 @if (session('message'))
-<div class="alert alert-success">
+<div class="alert alert-danger">
     {{session('message')}}
 </div>
 @endif
 
 @if (session('error'))
-<div class="alert alert-success">
+<div class="alert alert-danger">
     {{session('error')}}
 </div>
 @endif
@@ -44,6 +44,7 @@
     </button>
 </form>
 
+  {{$users->links()}}
 
     @foreach ($users as $user)
     <div class="card bg bg-dark text-light mb-5">
@@ -67,5 +68,8 @@
         </div>
       </div>
     @endforeach
+
+    {{$users->links()}}
+
 
 @endsection

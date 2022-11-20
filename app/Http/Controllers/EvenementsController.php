@@ -22,7 +22,7 @@ class EvenementsController extends Controller
     public function index()
     {
         //
-        $evenements =  Evenements::orderby('date', 'asc')->orderby('heure', 'asc')->get();
+        $evenements =  Evenements::orderby('date', 'desc')->paginate(5);
 
         return view('admin.evenements.evenementsList', [
             'evenements' => $evenements,
@@ -37,15 +37,13 @@ class EvenementsController extends Controller
     public function create()
     {
         //
-        $users = User::all();
+        $users = User::select('name', 'id')->get();
         $categories = categories::select('name', 'id')->get();
-        $regions = Region::select('name', 'id')->oldest('name')->get();
-        $villes = Ville::select('name', 'id')->oldest('name')->get();
+        $regions = Region::select('name', 'id')->orderby('id')->get();
 
         return view('admin.evenements.evenementsForm', [
             'categories' => $categories,
             'regions' => $regions,
-            'villes' => $villes,
             'users' => $users,
         ]);
     }
@@ -113,14 +111,12 @@ class EvenementsController extends Controller
     {
         //
         $categories = categories::select('name', 'id')->get();
-        $regions = Region::select('name', 'id')->oldest('name')->get();
-        $villes = Ville::select('name', 'id')->oldest('name')->get();
+        $regions = Region::select('name', 'id')->orderby('id')->get();
 
         return view('admin.evenements.evenementsEdited', [
             'evenement' => $evenement,
             'categories' => $categories,
             'regions' => $regions,
-            'villes' => $villes,
         ]);
     }
 

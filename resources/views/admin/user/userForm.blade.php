@@ -34,7 +34,7 @@
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Adresse Email') }}</label>
-
+                            <br>
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -43,15 +43,30 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <div class="form-check form-check-inline col-md-6">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="admin" />
-                                    <label class="form-check-label" for="inlineRadio1">admin</label>
+                                <br>
+                                <br>
+                                <select name="role" id="role" class="form-select w-50">
+                                    <option value="admin" class="form-control">Admin</option>
+                                    <option value="user" class="form-control">User</option>
+                                </select>
+
+                                <br>
+                                <br>
+                                <div class="">
+                                    <label for="region" class="">Région</label>
+                                    <select class="custom-select  bg bg-dark text-light " name="region" id="region">
+                                        @foreach ($regions as $region)
+                                        <option value="{{$region->name}}">{{$region->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="">
+                                    <label for="ville" class="">ville</label>
+                                    <input type="text" class="" name="ville">
                                 </div>
                                 
-                                <div class="form-check form-check-inline col-md-6">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="user" />
-                                    <label class="form-check-label" for="inlineRadio2">user</label>
-                                </div>
+                               
                             </div>
                         </div>
 

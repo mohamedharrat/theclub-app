@@ -13,6 +13,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\region;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -54,7 +55,14 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::registerView(function () {
-            return view('auth.register');
+
+            $regions = Region::select('name', 'id')->orderby('id')->get();
+            return view(
+                'auth.register',
+                [
+                    'regions' => $regions,
+                ]
+            );
         });
 
 

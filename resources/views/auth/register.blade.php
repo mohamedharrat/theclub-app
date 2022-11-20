@@ -78,6 +78,31 @@
                             </div>
                         </div>
 
+
+                        <div class="row mb-3">
+                            <label for="region" class="col-md-4 col-form-label text-md-end">Région</label>
+                            <div class="col-md-4">
+                                <select class="custom-select  bg bg-dark text-light " name="region" id="region">
+                                    @foreach ($regions as $region)
+                                    <option value="{{$region->name}}">{{$region->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row mb-3">
+                            <label for="ville" class="col-md-4 col-form-label text-md-end">ville</label>
+                            <div class="col-md-4">
+                                <input type="text" class="text-light" name="ville">
+                            </div>
+                        </div>
+
+
+                        <input type="text" value="user" name="role" hidden>
+
+        
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">

@@ -23,7 +23,7 @@
     <div class="info">
     
     
-      <div class="resultat">
+      <div class="resultat text-light">
         <p>foot : <span id="resultatFoot"></span></p>
         <p>tennis : <span id="resultatTennis"></span></p>
         <p>basket : <span id="resultatBasket"></span></p>

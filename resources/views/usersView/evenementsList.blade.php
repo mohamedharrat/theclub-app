@@ -62,7 +62,24 @@
     
     <input type="radio" name="category" class="btn-check" id="basket" value="3"<?php echo $category == 3 ? "checked" : "" ?>>
     <label class="btn btn-outline-danger" for="basket">Basket</label>
+    
+    <button class="btn btn-dark" 
+    onclick="document.getElementById('foot').value = '' 
+    document.getElementById('tennis').value = '' 
+    document.getElementById('basket').value = '' 
+    "
+    
+    >
+    RESET
+    </button>
     <br>
+    <br>
+    <label for="region" class="text-light">Région</label>
+                    <select class="custom-select bg bg-dark text-light" name="region_filtre" id="region">
+                        @foreach ($regions as $region)
+                        <option value="{{$region->name}}">{{$region->name}}</option>
+                        @endforeach
+                    </select>
   </form>
 
   
@@ -97,7 +114,7 @@
           @endif
           <h3 id="category">{{$userEvenement->category->name}}</h3>
           <p>
-            {{$userEvenement->lieu}} - {{$userEvenement->adresse}}
+            {{$userEvenement->city}}-{{$userEvenement->lieu}} - {{$userEvenement->adresse}}
           </p>
           <p>durée - {{$userEvenement->duree}} h</p>
         </div>
