@@ -60,7 +60,13 @@ class EvenementsController extends Controller
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
-
+            'city' => 'required',
+            'date' => 'required',
+            'heure' => 'required',
+            'duree' => 'required',
+            'lieu' => 'required',
+            'adresse' => 'required',
+            // 'players_number' => 'required',
         ]);
 
         $evenement = $valid;
@@ -140,7 +146,7 @@ class EvenementsController extends Controller
         $evenementEdited = $valid;
         $evenementEdited['category_id'] = $request->categories;
         $evenementEdited['region'] = $request->region;
-        $evenementEdited['city'] = $request->ville;
+        $evenementEdited['city'] = $request->city;
         $evenementEdited['date'] = $request->date;
         $evenementEdited['heure'] = $request->heure;
         $evenementEdited['duree'] = $request->duree;
@@ -148,12 +154,13 @@ class EvenementsController extends Controller
         $evenementEdited['author_id'] = Auth::user()->id;
         $evenementEdited['adresse'] = $request->adresse;
 
+
         $evenements->update($evenementEdited);
 
 
 
 
-        return redirect('admin/evenements.index')->with('update', "L'évenement n° $evenements->id a été mis à jour avec succès!");
+        return redirect('admin/evenements')->with('update', "L'évenement n° $evenements->id a été mis à jour avec succès!");
     }
 
     /**

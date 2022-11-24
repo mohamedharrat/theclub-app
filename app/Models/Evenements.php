@@ -62,11 +62,4 @@ class Evenements extends Model
     {
         return Auth::user()->likes->contains('id', $this->id);
     }
-
-
-
-    // public function categories()
-    // {
-    //     return $this->hasMany(Categories::class);
-    // }
 }

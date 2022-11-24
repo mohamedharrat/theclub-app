@@ -27,25 +27,37 @@
                         @endforeach
                     </select>
                 </div>
-    
+
                 <div class="card mb-3 bg bg-dark">
                     <label for="title">Titre</label>
-                    <input class="bg bg-dark text-light" type="text" name="title" id="title" @error('title')is-invalid @enderror">
+                    <input class="bg bg-dark text-light  @error('title')is-invalid @enderror" type="text" name="title" id="title">
                     @error('title')
                     <div class="alert alert-danger">
                      {{$message}}
                     </div>
                  @enderror
                 </div>
+    
+               
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="player">nombre de joueur</label>
-                    <input type="number" name="player" id="player" class="bg bg-dark text-light" >
+                    <input type="number" name="player" id="player" class="bg bg-dark text-light  @error('players_number')is-invalid @enderror" min="1">
+                    @error('players_number')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
                 
                 <div class="card mb-3 bg bg-dark ">
                     <label for="texte">description</label>
-                    <textarea class="form-control bg bg-dark text-light" id="texte" name="description" rows="3" required></textarea>
+                    <textarea class="form-control bg bg-dark text-light  @error('description')is-invalid @enderror" id="texte" name="description" rows="3" ></textarea>
+                    @error('description')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
 
                
@@ -63,43 +75,73 @@
                 </div>
 
 
-        
                 <div class="card mb-3 bg bg-dark">
-                    <label for="ville">Ville</label>
-                    <input class="bg bg-dark text-light" type="text" name="ville" id="ville">
+                    <label for="city">Ville</label>
+                    <input class="bg bg-dark text-light  @error('city')is-invalid @enderror" type="text" name="city" id="city">
+                    @error('city')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
-
-                <div class="card mb-3 bg bg-dark">
-                    <label for="lieu">lieu de l'évenement</label>
-                    <input type="text" class="bg bg-dark text-light" name="lieu" id="lieu" >
-                </div>
+                
 
                 {{-- <div class="card mb-3"> --}}
                     <label for="adresse">adresse <i class="bi bi-geo-alt-fill"></i></label>
-                    <input type="text" name="adresse" id="adresse" >
+                    <input type="text" name="adresse" id="adresse" class=" @error('adresse')is-invalid @enderror">
+                    @error('adresse')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 {{-- </div> --}}
+
+                <div class="card mb-3 bg bg-dark">
+                    <label for="lieu">lieu de l'évenement</label>
+                    <input type="text" class="bg bg-dark text-light  @error('lieu')is-invalid @enderror" name="lieu" id="lieu">
+                    @error('lieu')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
+                </div>
 
               
         
               
             </div>
 
-            <h5 class="card-header">Date, Heure et durée de l'évenement</h5>
+            <h5 class="card-header">Date, heure et durée de l'évenement</h5>
             <div class="card-body bg bg-dark"> 
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="date">date de l'évenement</label>
-                    <input type="date" class="bg bg-dark text-light" name="date" id="date" min="{{now()}}" >
+                    <input type="date" class="bg bg-dark text-light  @error('date')is-invalid @enderror" name="date" id="date">
+                    @error('date')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
 
                 <div class="card mb-3 bg bg-dark">
-                        <label for="heure">heure de l'évenement</label>
-                        <input type="time" class="bg bg-dark text-light" name="heure" id="heure" >
+                    <label for="heure">heure de l'évenement</label>
+                    <input type="time" class="bg bg-dark text-light  @error('heure')is-invalid @enderror" name="heure" id="heure">
+                    @error('heure')
+                    <div class="alert alert-danger">
+                     {{$message}}
                     </div>
+                 @enderror
+                </div>
 
                 <div class="card mb-3 bg bg-dark">
                     <label for="duree">Durée de l'évenement</label>
-                    <input type="time" name="duree" id="duree" class="bg bg-dark text-light" >
+                    <input type="time" name="duree" id="duree" class="bg bg-dark text-light  @error('duree')is-invalid @enderror">
+                    @error('duree')
+                    <div class="alert alert-danger">
+                     {{$message}}
+                    </div>
+                 @enderror
                 </div>
             </div>
         </div>

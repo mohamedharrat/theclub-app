@@ -9,9 +9,9 @@
 </div>  
 @endif
 
-@if (session('Update'))
+@if (session('update'))
 <div class="alert alert-success">
-    {{session('Update')}}
+    {{session('update')}}
 </div>
 @endif
 @if (session('inscription'))
@@ -58,8 +58,8 @@
 
 
 @else
-
-{{$evenements->links()}}
+  {{$evenements->links()}}
+    
 
 @foreach ($evenements as $evenement)
 
@@ -86,10 +86,11 @@
     @endif
     <h3 id="category">{{$evenement->category->name}}</h3>
     <p>
-      {{$evenement->lieu}} - {{$evenement->adresse}}
+      {{$evenement->city}}-{{$evenement->lieu}} 
     </p>
     <p>durée - {{$evenement->duree}} h</p>
   </div>
+  
   <div class="show">
     <a href="{{route('evenements.show', ['evenement'=>$evenement->id]) }}"><i class="bi bi-zoom-in"></i></a>
     

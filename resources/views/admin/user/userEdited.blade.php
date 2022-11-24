@@ -68,7 +68,7 @@
                                 <br>
                                 <div class="">
                                     <label for="ville" class="">ville</label>
-                                    <input type="text" class="" name="ville">
+                                    <input type="text" class="" name="ville" value="{{$user->city}}">
                                 </div>
                             </div>
                         </div>

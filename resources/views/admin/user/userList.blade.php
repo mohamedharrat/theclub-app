@@ -52,7 +52,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$user->email}}</h5>
           <p class="card-text">Rôle : {{$user->role}} / inscrit depuis :  {{$user->created_at}}</p>
-            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+          <p>Région : {{$user->region}} / ville : {{$user->city}}</p>
             <a href="{{route('users.edit',['user'=>$user->id])}}" style="text-decoration: none">
                 <i class="bi bi-pencil-square px-1"></i> Modifier
             </a>

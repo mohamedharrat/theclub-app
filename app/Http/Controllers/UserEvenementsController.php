@@ -30,7 +30,7 @@ class UserEvenementsController extends Controller
         $date = date('Y-m-d');
         // dd($foot, $tennis, $basket);
         $regions = Region::select('name', 'id')->orderby('id')->get();
-        $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', $date)->orderby('heure', 'asc')->get();
+        $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', $date)->orderby('heure', 'asc')->paginate(5);
 
 
         if ($request->date_filtre && $request->region_filtre) {
@@ -38,9 +38,9 @@ class UserEvenementsController extends Controller
             // $regions = $request->region_filtre;
 
             if (isset($category)) {
-                $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->where('region', $request->region_filtre)->orderby('heure', 'asc')->get();
+                $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $category)->where('region', $request->region_filtre)->orderby('heure', 'asc')->paginate(5);
             } else {
-                $userEvenements = Evenements::select()->where('region', $request->region_filtre)->where('date', $date)->orderby('heure', 'asc')->get();
+                $userEvenements = Evenements::select()->where('region', $request->region_filtre)->where('date', $date)->orderby('heure', 'asc')->paginate(5);
             }
             // if ($foot) {
             //     $userEvenements = Evenements::select()->where('date', $date)->where('category_id', $foot)->orderby('heure', 'asc')->get();
@@ -55,7 +55,7 @@ class UserEvenementsController extends Controller
 
         // dd($userEvenements);
         else {
-            $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', date('Y-m-d'))->orderby('heure', 'asc')->get();
+            $userEvenements = Evenements::select()->where('region', Auth::user()->region)->where('date', date('Y-m-d'))->orderby('heure', 'asc')->paginate(5);
         }
 
 
@@ -98,14 +98,20 @@ class UserEvenementsController extends Controller
         $valid = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required',
-
+            'city' => 'required',
+            'date' => 'required',
+            'heure' => 'required',
+            'duree' => 'required',
+            'lieu' => 'required',
+            'adresse' => 'required',
+            // 'players_number' => 'required',
 
         ]);
 
         $evenement = $valid;
         $evenement['category_id'] = $request->categories;
         $evenement['region'] = $request->region;
-        $evenement['city'] = $request->ville;
+        $evenement['city'] = $request->city;
         $evenement['date'] = $request->date;
         $evenement['heure'] = $request->heure;
         $evenement['lieu'] = $request->lieu;
@@ -178,7 +184,7 @@ class UserEvenementsController extends Controller
             'description' => 'required',
             'categories' => 'required',
             'region' => 'required',
-            'ville' => 'required',
+            'city' => 'required',
             'date' => 'required',
             'heure' => 'required',
             'duree' => 'required',
@@ -190,13 +196,14 @@ class UserEvenementsController extends Controller
         $evenementEdited = $valid;
         $evenementEdited['category_id'] = $request->categories;
         $evenementEdited['region'] = $request->region;
-        $evenementEdited['city'] = $request->ville;
+        $evenementEdited['city'] = $request->city;
         $evenementEdited['date'] = $request->date;
         $evenementEdited['heure'] = $request->heure;
         $evenementEdited['duree'] = $request->duree;
         $evenementEdited['lieu'] = $request->lieu;
         $evenementEdited['author_id'] = Auth::user()->id;
         $evenementEdited['adresse'] = $request->adresse;
+        $evenementEdited['players_number'] = $request->players_number;
 
         if ($evenement['author_id'] == Auth::user()->id) {
             $evenement->update($evenementEdited);
@@ -205,7 +212,7 @@ class UserEvenementsController extends Controller
 
         if ($evenement) {
 
-            return redirect('userEvenements')->with('update', "L'évenement n° $evenement->id a été mis à jour avec succès!");
+            return redirect('userEvenements')->with('update', "L'évenement $evenement->title a été mis à jour avec succès!");
         }
     }
 
@@ -225,7 +232,7 @@ class UserEvenementsController extends Controller
             $evenement->delete();
         }
 
-        return back()->with('delete', "L'evenement n° $evenement->id a été supprimé avec succès!");
+        return back()->with('delete', "L'evenement  $evenement->title a été supprimé avec succès!");
     }
 
     public function participe($id)
@@ -277,8 +284,9 @@ class UserEvenementsController extends Controller
 
     public function mesEvenements()
     {
-        $userEvenements = Evenements::all()->where('author_id', Auth::user()->id)->where('date', '=>', date('Y-m-d'));
-
+        $userEvenements = Evenements::all()->where('author_id', Auth::user()->id)->where('date', '>=', date('Y-m-d'));
+        // $participe = Evenements::select()->players()->where('user_id', Auth::user()->id);
+        // dd($participe);
 
         return view('usersView.mesEvenements', [
             'userEvenements' => $userEvenements,

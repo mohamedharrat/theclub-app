@@ -10,9 +10,11 @@
 <h3> {{$results->count()}} résultat(s)  trouvé(s)!</h3>
 </div>
 @endif
+{{$results->links()}}
 
 @foreach ($results as $evenement)
 <div class="evenement">
+  <h6 class=" text-center text-light p-1">{{$evenement->date}}</h6>
     @if ($evenement->category->name == "tennis")
     <div class="heure" id="heure" style="background: url('/photo-event/tennis.jpg')center/cover">
       <h2>{{$evenement->heure}}</h2> 
@@ -30,7 +32,7 @@
           <p class="nbr">{{$evenement->players_number}}-place</p>
           <h3 id="category">{{$evenement->category->name}}</h3>
           <p>
-            {{$evenement->lieu}} - {{$evenement->adresse}}
+            {{$evenement->city}}-{{$evenement->lieu}} 
           </p>
           <p>durée - {{$evenement->duree}} h</p>
         </div>

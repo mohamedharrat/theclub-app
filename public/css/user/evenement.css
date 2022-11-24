@@ -1,22 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+
 .header {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+.header .left {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+    flex-direction: column;
     background: #000000b4;
-    height: 200px;
-    width: 100% !important;
+    height: 30%;
+    width: 40% !important;
     padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 
-.header::before {
-    clip-path: polygon(70% 0, 100% 0%, 100% 100%, 30% 99%);
+.header .right {
+    /* float: right; */
+    display: flex;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    content: " ";
-    height: 100%;
-    width: 100%;
-    background: url(/photo-list/tennis-court-ge26f16812_1920.jpg)center/cover;
+    flex-direction: column;
+    background: #000000b4;
+    height: 30%;
+    width: 40% !important;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
 }
+
+.right h3 {
+    font-style: italic;
+    font-style:  "Roboto";
+    color: yellow;
+    text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
+}
+
+.right .logo ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    list-style-type: none;
+
+}
+
+.logo ul li a {
+    color: white;
+}
+.logo ul li {
+    transition: .3s ease-in-out;
+}
+
+.logo ul li:hover {
+    transform: translateY(-5px);
+} 
+
+
 
 
 
@@ -92,6 +139,7 @@ box-shadow: 5px 5px 15px 5px #000000;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 10%;
     background: transparent;
 }

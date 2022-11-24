@@ -24,7 +24,11 @@
                         <label for="title">Titre</label>
                         <input class="bg bg-dark text-light" type="text" name="title" id="title" value="{{$userEvenement->title}}">
                     </div>
-                    
+                <div class="card mb-3 bg bg-dark text-light">
+                    <label for="player">nombre de joueur</label>
+                    <input type="number" name="players_number" id="player" class="bg bg-dark text-light  @error('players_number')is-invalid @enderror" min="1" value="{{$userEvenement->players_number}}">
+                </div>
+
                     <div class="card mb-3 bg bg-dark text-light">
                         <label for="texte">description</label>
                         <textarea class="form-control bg bg-dark text-light" id="texte" name="description" rows="3" required{{$userEvenement->description}}></textarea>
@@ -48,11 +52,7 @@
             
                     <div class="card mb-3 bg bg-dark text-light">
                         <label for="municipality">ville</label>
-                        <select class="custom-select bg bg-dark text-light" name="ville" id="ville">
-                            @foreach ($villes as $ville)
-                            <option value="{{$ville->name}}">{{$ville->name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" value="{{$userEvenement->city}}" class="bg bg-dark text-light" name="city">
                     </div>
 
                     {{-- <div class="card mb-3"> --}}

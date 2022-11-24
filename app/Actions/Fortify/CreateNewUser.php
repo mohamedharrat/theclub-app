@@ -30,7 +30,7 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'region' => ['string', 'max:255'],
-            'city' => ['string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
             'password' => $this->passwordRules(),
         ])->validate();
 
@@ -38,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'region' => $input['region'],
-            'city' => $input['ville'],
+            'city' => $input['city'],
             'role' => $input['role'],
             'password' => Hash::make($input['password']),
         ]);

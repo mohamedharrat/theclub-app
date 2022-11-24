@@ -13,7 +13,9 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
+    background: #373B44;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 .centre {
@@ -75,11 +77,11 @@ body {
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    /* background-color: white; */
+    /* background-color: white;  */
     /* box-shadow: -20px 2px 5px -2px rgba(0,0,0,0.75);
-    -webkit-box-shadow: -20px 2px 5px -2px rgba(0,0,0,0.75);
-    -moz-box-shadow: -20px 2px 5px -2px rgba(0,0,0,0.75);
-    -webkit-animation:slide-in-top 1.8s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-top 1.8s cubic-bezier(.25,.46,.45,.94) both; */
+    -webkit-box-shadow: -20px 2px 5px -2px rgba(0,0,0,0.75); */
+    -moz-box-shadow: -20px 2px 5px -2px rgba(0,0,0,0.75); 
+    -webkit-animation:slide-in-top 1.8s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-top 1.8s cubic-bezier(.25,.46,.45,.94) both;
 }
 
 .register h2 {
@@ -87,6 +89,10 @@ body {
     font-size: 30px;
     margin-bottom: 20px;
 }
+
+/* .register a:hover {
+    transform: translateX(3px) !important;
+} */
 
 .register i {
     font-size: 80px;
@@ -158,12 +164,14 @@ footer {
     align-items: center;
     justify-content: space-between;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.609);
     /* left: 50%;
     transform: translate(-50%); */
 }
 .resultat p {
-    padding: 0 20px;
+    margin-right: 10px;
+    padding: 5px 20px;
+    background: rgba(0, 0, 0, 0.651);
+    border-radius: 10px;
 }
 .info {
     position: absolute;
@@ -174,4 +182,5 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: -1;
 }

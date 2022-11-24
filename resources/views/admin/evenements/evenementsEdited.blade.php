@@ -27,7 +27,7 @@
 
                     <div class="card mb-3 bg bg-dark text-light">
                         <label for="player">nombre de joueur</label>
-                        <input type="number" name="player" id="player" class="bg bg-dark text-light">
+                        <input type="number" name="player" id="player" class="bg bg-dark text-light" min="1" value="{{$evenement->players_number}}">
                     </div>
                     
                     <div class="card mb-3 bg bg-dark text-light">
@@ -52,12 +52,8 @@
     
             
                     <div class="card mb-3 bg bg-dark text-light">
-                        <label for="municipality">ville</label>
-                        <select class="custom-select bg bg-dark text-light" name="ville" id="ville">
-                            @foreach ($villes as $ville)
-                            <option value="{{$ville->name}}">{{$ville->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="city">ville</label>
+                        <input class="bg bg-dark text-light  @error('city')is-invalid @enderror" type="text" name="city" id="city" value="{{$evenement->city}}">
                     </div>
 
                     {{-- <div class="card mb-3"> --}}

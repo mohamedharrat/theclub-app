@@ -39,7 +39,7 @@
     {{-- {{$evenements->links()}} --}}
     <div class="favoris">
 
-        <h2 class="titre">Mes Favoris</h2>
+        <h1 class="titre">Mes Favoris</h1>
         @foreach (Auth::user()->likes as $userEvenement)
         @if ($userEvenement->date >= date('Y-m-d'))
             
@@ -68,7 +68,7 @@
             @endif            
             <h3 id="category">{{$userEvenement->category->name}}</h3>
             <p>
-                {{$userEvenement->lieu}} - {{$userEvenement->adresse}}
+                {{$userEvenement->city}}-{{$userEvenement->lieu}} 
             </p>
             <p>durée - {{$userEvenement->duree}} h</p>
         </div>
@@ -97,6 +97,8 @@
             </form>
         </div>
     </div>
+    @else
+    <h4 class="text-light">aucun événement favoris</h4>
     @endif
     @endforeach
 </div>

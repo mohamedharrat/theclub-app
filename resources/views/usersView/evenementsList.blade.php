@@ -14,9 +14,9 @@
 </div>  
 @endif
 
-@if (session('compteUpdate'))
+@if (session('update'))
 <div class="alert alert-success">
-    {{session('compteUpdate')}}
+    {{session('update')}}
 </div>
 @endif
 @if (session('inscription'))
@@ -43,10 +43,13 @@
 </div>
 @endif 
 <div class="header">
+  <div class="left">
 
-  <form action="" method="get" id="date_filtre">
-    @csrf
-  </form>
+    <a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
+    
+    <form action="" method="get" id="date_filtre">
+      @csrf
+    </form>
   <br>
   <form action="" method="get" id="sport_filtre">
     <input type="date" name="date_filtre" id="date" min="" value="{{$date}}" >
@@ -67,27 +70,50 @@
     onclick="document.getElementById('foot').value = '' 
     document.getElementById('tennis').value = '' 
     document.getElementById('basket').value = '' 
-    "
-    
-    >
+    ">
     RESET
-    </button>
-    <br>
-    <br>
-    <label for="region" class="text-light">Région</label>
-                    <select class="custom-select bg bg-dark text-light" name="region_filtre" id="region">
-                        @foreach ($regions as $region)
-                        <option value="{{$region->name}}">{{$region->name}}</option>
-                        @endforeach
-                    </select>
-  </form>
+  </button>
+  <br>
+  <br>
+  <label for="region" class="text-light">Région</label>
+  <select class="custom-select bg bg-dark text-light" name="region_filtre" id="region">
+    @foreach ($regions as $region)
+    <option value="{{$region->name}}">{{$region->name}}</option>
+    @endforeach
+  </select>
+</form>
+</div>
 
-  
-  {{-- <a href=""></a> --}}
-  <a class="addEvents"  href="{{route('userEvenements.create')}}"><i class="bi bi-plus-circle-fill"></i>  crée un événement</a>
+<div class="right">
+  <h3>THE CLUB</h3>
+<p>Bienvenue à THE CLUB , <br> 
+tu te trouve à l'accueil là où 
+tu pourra tout gérer, de le création à la participation
+d'événements . tu à également accès au chat et ton profil.
+tiens toi informé des dernières actualités en consultant nos différent réseau :
+</p>
+<div class="logo">
+  <ul>
+    <li>
+      <a href="#"><i class="bi bi-twitter"></i></a>
+    </li>
+    <li>
+      <a href="#"><i class="bi bi-facebook"></i></a>
+    </li>
+    <li>
+      <a href="#"><i class="bi bi-instagram"></i></a>
+    </li>
+    <li>
+      <a href="#"><i class="bi bi-youtube"></i></a>
+    </li>
+  </ul>
+</div>
+</div>
+
+{{-- <a href=""></a> --}}
 </div>
 <div class="list">
-  {{-- {{$evenements->links()}} --}}
+  {{$userEvenements->links()}}
 
   @foreach ($userEvenements as $userEvenement)
   
@@ -114,7 +140,7 @@
           @endif
           <h3 id="category">{{$userEvenement->category->name}}</h3>
           <p>
-            {{$userEvenement->city}}-{{$userEvenement->lieu}} - {{$userEvenement->adresse}}
+            {{$userEvenement->city}}-{{$userEvenement->lieu}} 
           </p>
           <p>durée - {{$userEvenement->duree}} h</p>
         </div>

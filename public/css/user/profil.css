@@ -7,15 +7,16 @@
     background: rgba(0, 0, 0, 0.51);
     text-align: center;
     color: white;
-    background: url(/photo-user_page/pexels-ivan-samkov-4162550.jpg)center/cover;
+    /* background: url(/photo-user_page/pexels-ivan-samkov-4162550.jpg)center/cover; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .info-p {
+    padding: 10px;
     border: 10px white double;
-    width: 50%;
+    width: 500px;
     background-color: rgba(0, 0, 0, 0.489);
 }
 
